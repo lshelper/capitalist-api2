@@ -36,6 +36,28 @@ capitalist_api2_require_credentials() {
   fi
 }
 
+capitalist_api2_require_value() {
+  local name="$1"
+  local value="$2"
+
+  if [ -z "$value" ]; then
+    printf 'capitalist-api2: set %s\n' "$name" >&2
+    return 1
+  fi
+}
+
+capitalist_api2_json_escape() {
+  local value="$1"
+
+  value="${value//\\/\\\\}"
+  value="${value//\"/\\\"}"
+  value="${value//$'\n'/\\n}"
+  value="${value//$'\r'/\\r}"
+  value="${value//$'\t'/\\t}"
+
+  printf '%s' "$value"
+}
+
 capitalist_api2_urlencode() {
   local value="$1"
   local length="${#value}"
