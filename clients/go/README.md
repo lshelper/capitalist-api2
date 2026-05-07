@@ -49,6 +49,9 @@ Run a specific command:
 ```bash
 docker compose run --rm go go test ./...
 docker compose run --rm go go run ./examples/list-accounts USD
+docker compose run --rm go go run ./examples/get-rate USD EUR
+docker compose run --rm go go run ./examples/create-exchange U0123504 E0123505 100
+docker compose run --rm go go run ./examples/create-rucard-payment U0123504 1234567890123456 Ivan Petrov Sergeevich 100 USD
 ```
 
 For real API calls, pass credentials from your shell:

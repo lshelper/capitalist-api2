@@ -7,6 +7,7 @@ import (
 	"os"
 
 	capitalist "github.com/lshelper/capitalist-api2/clients/go"
+	"github.com/lshelper/capitalist-api2/clients/go/examples/internal/exampleclient"
 )
 
 func main() {
@@ -14,17 +15,7 @@ func main() {
 		log.Fatal("usage: go run ./examples/list-accounts USD")
 	}
 
-	apiKey := os.Getenv("CAPITALIST_API2_KEY")
-	apiSecret := os.Getenv("CAPITALIST_API2_SECRET")
-	if apiKey == "" || apiSecret == "" {
-		log.Fatal("set CAPITALIST_API2_KEY and CAPITALIST_API2_SECRET")
-	}
-
-	client := capitalist.NewClient(apiKey, apiSecret)
-	if baseURL := os.Getenv("CAPITALIST_API2_BASE_URL"); baseURL != "" {
-		client = capitalist.NewClient(apiKey, apiSecret, capitalist.WithBaseURL(baseURL))
-	}
-
+	client := exampleclient.New()
 	accounts, err := client.ListAccounts(context.Background(), capitalist.Currency(os.Args[1]))
 	if err != nil {
 		log.Fatal(err)
