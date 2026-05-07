@@ -15,3 +15,5 @@ composer.lock
 
 clients/http/http-client.private.env.json
 clients/http/http-client.env.json
+
+.idea/
