@@ -1,0 +1,6 @@
+### Get KYC status
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/kyc/status/{{kycExternalUserId}}/{{kycSort}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}

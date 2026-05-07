@@ -1,6 +1,9 @@
 # Payment channel requests
 
-Open one of these `.http` files in IntelliJ IDEA and run the request for the channel you need.
+Open one of these `.http` files in IntelliJ IDEA and run the request you need.
+
+- `create/*.http` contains payment creation examples split by payment channel.
+- `status/*.http` contains payment lookup requests by document ID or user request ID.
 
 Each request signs the exact JSON body with:
 

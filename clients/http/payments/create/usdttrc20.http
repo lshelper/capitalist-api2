@@ -1,0 +1,19 @@
+### USDTTRC20 payment
+< {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "usdttrc20-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "USDTTRC20 payout example",
+  "payload": {
+    "type": "USDTTRC20",
+    "account": "T0000000000000000000000000000000000"
+  }
+}

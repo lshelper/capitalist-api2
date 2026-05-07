@@ -1,0 +1,19 @@
+### TELE2 mobile payment
+< {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "tele2-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "TELE2 payout example",
+  "payload": {
+    "type": "TELE2",
+    "account": "79001234567"
+  }
+}

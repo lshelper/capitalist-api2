@@ -1,0 +1,34 @@
+### THAILAND_BANK payment
+< {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "thailand-bank-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "THAILAND_BANK payout example",
+  "payload": {
+    "type": "THAILAND_BANK",
+    "destination": {
+      "bankCode": "BKKBTHBK",
+      "accountName": "Somchai Prasert",
+      "accountNumber": "1234567890"
+    },
+    "recipient": {
+      "firstName": "Somchai",
+      "lastName": "Prasert",
+      "email": "beneficiary@example.com",
+      "phone": "66812345678",
+      "zipCode": "10100",
+      "city": "Bangkok",
+      "address": "Sukhumvit Road",
+      "country": "th"
+    },
+    "account": "1234567890"
+  }
+}

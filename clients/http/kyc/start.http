@@ -1,0 +1,12 @@
+### Start KYC
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/kyc/start
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "kycExternalUserId": "{{kycExternalUserId}}",
+  "sort": "{{kycSort}}"
+}

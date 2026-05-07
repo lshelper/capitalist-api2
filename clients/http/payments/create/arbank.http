@@ -1,0 +1,21 @@
+### ARBANK payment
+< {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "arbank-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "ARBANK payout example",
+  "payload": {
+    "type": "ARBANK",
+    "account": "12345",
+    "taxId": "12345678901",
+    "cbu": "1234567890123456789012"
+  }
+}
