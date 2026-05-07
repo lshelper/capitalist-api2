@@ -1,0 +1,163 @@
+### Capitalist API2 - IntelliJ IDEA HTTP Client
+### Select the `dev` environment before running requests.
+
+### Read whitelist
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/whitelist
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Add IPs to whitelist
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/whitelist
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "ip": [
+    "127.0.0.*"
+  ]
+}
+
+### Remove IPs from whitelist
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/whitelist/remove
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "ip": [
+    "127.0.0.*"
+  ]
+}
+
+### List accounts
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/account/list?currency={{currency}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Create exchange
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/exchange
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "fromAccount": "{{fromAccount}}",
+  "toAccount": "{{toAccount}}",
+  "amount": 100.00
+}
+
+### Get exchange rate
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/rate?from={{fromCurrency}}&to={{toCurrency}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Create payment
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "{{userRequestId}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "IntelliJ HTTP Client example",
+  "payload": {
+    "type": "CAPITALIST",
+    "account": "{{toAccount}}"
+  }
+}
+
+### Get payment by document ID
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/payment/document/{{documentId}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Get payment by user request ID
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/payment/{{userRequestId}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Get orders
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/orders?limit=100&offset=0
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Get transactions
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/transactions?limit=100&offset=0
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Start KYC
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/kyc/start
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "kycExternalUserId": "{{kycExternalUserId}}",
+  "sort": "{{kycSort}}"
+}
+
+### Get KYC status
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/kyc/status/{{kycExternalUserId}}/{{kycSort}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Get KYC status by UUID
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/kyc/statusByUuid/{{kycUuid}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+
+### Set KYC data
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/kyc/setData/{{kycUuid}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "User"
+}
+
+### Confirm KYC
+< {% import { signCapitalistRequest } from "./sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/kyc/confirm/{{kycUuid}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{}

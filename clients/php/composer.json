@@ -1,0 +1,16 @@
+{
+  "name": "lshelper/capitalist-api2-php",
+  "description": "PHP 7.x client for Capitalist API2",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Capitalist\\Api2\\": "src/"
+    }
+  }
+}

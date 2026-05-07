@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+node_modules/
+dist/
+coverage/
+
+vendor/
+composer.lock
+
+*.log
+*.tmp
+
+clients/http/http-client.private.env.json
