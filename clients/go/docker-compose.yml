@@ -1,0 +1,17 @@
+services:
+  go:
+    build:
+      context: .
+    working_dir: /app
+    volumes:
+      - .:/app
+      - go-cache:/go/pkg/mod
+      - go-build-cache:/root/.cache/go-build
+    environment:
+      CAPITALIST_API2_KEY: ${CAPITALIST_API2_KEY:-}
+      CAPITALIST_API2_SECRET: ${CAPITALIST_API2_SECRET:-}
+      CAPITALIST_API2_BASE_URL: ${CAPITALIST_API2_BASE_URL:-}
+
+volumes:
+  go-cache:
+  go-build-cache:

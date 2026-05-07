@@ -68,4 +68,5 @@ Note: the official HTML page obfuscates the email inside the sample JSON. Becaus
 | Bash | `clients/bash` | Sourceable shell functions around `curl`. |
 | IntelliJ IDEA HTTP Client | `clients/http` | Executable `.http` collection with pre-request SHA-256 signing. |
 | PHP 7.x | `clients/php` | PSR-4 package using `ext-curl`. |
+| Go | `clients/go` | Go client using only the standard library. |
 | TypeScript/Node.js | `clients/typescript` | Strict TypeScript client using `fetch`. |

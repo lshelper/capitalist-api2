@@ -13,6 +13,7 @@ clients/
   bash/         Bash client for scripts and CI jobs
   http/         IntelliJ IDEA .http request collection
   php/          PHP 7.x client
+  go/           Go client
   typescript/   TypeScript/Node.js client
 docs/
   api-surface.md
@@ -53,6 +54,7 @@ Payment channel payloads are accepted as plain objects first. Stronger typed bui
 ## Docker
 
 The PHP client includes a Docker setup for running PHP 7.4 locally without installing PHP on the host.
+The Go client also includes a Docker setup for running tests, builds and examples without installing Go locally.
 
 Build the image:
 
@@ -92,4 +94,20 @@ Clean up containers, network and the Composer cache volume:
 
 ```bash
 docker compose down -v
+```
+
+Build and test the Go client:
+
+```bash
+cd clients/go
+docker compose build
+docker compose run --rm go
+```
+
+Run a Go example against the real API:
+
+```bash
+export CAPITALIST_API2_KEY="your-api-key"
+export CAPITALIST_API2_SECRET="your-api-secret"
+docker compose run --rm go go run ./examples/list-accounts USD
 ```
