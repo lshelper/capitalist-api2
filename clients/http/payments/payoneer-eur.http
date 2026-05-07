@@ -1,0 +1,19 @@
+### PAYONEER_EUR payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "payoneer-eur-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "PAYONEER_EUR payout example",
+  "payload": {
+    "type": "PAYONEER_EUR",
+    "account": "beneficiary@example.com"
+  }
+}

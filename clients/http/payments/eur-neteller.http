@@ -1,0 +1,29 @@
+### EUR_NETELLER payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "eur-neteller-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "EUR_NETELLER payout example",
+  "payload": {
+    "type": "EUR_NETELLER",
+    "wallet_email": "beneficiary@example.com",
+    "name": "John",
+    "surname": "Doe",
+    "country": "USA",
+    "city": "New York",
+    "address": "123 Main St",
+    "zip": "10001",
+    "code": "123456",
+    "phone": "12125551234",
+    "client_ip": "192.168.1.1",
+    "state": "NY"
+  }
+}

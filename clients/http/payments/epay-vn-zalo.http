@@ -1,0 +1,32 @@
+### EPAY_EPAY_E_VN_ZALO payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "epay-vn-zalo-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "EPAY_EPAY_E_VN_ZALO payout example",
+  "payload": {
+    "type": "EPAY_EPAY_E_VN_ZALO",
+    "receiver": {
+      "surName": "Tran",
+      "givName": "Anh",
+      "phone": "0901234567"
+    },
+    "sender": {
+      "surName": "Smith",
+      "country": "US",
+      "address": "123 Main St",
+      "purposeOfRemittance": "Family support"
+    },
+    "account": "123456789",
+    "receiveAmount": "100000",
+    "receiveCurrency": "USD"
+  }
+}

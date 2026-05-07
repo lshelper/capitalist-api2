@@ -1,0 +1,6 @@
+### Get merchant orders by merchant
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/orders?merchantId={{merchantId}}&merchantName={{merchantName}}&limit=100&offset=0
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}

@@ -1,0 +1,31 @@
+### GCASH payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "gcash-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "GCASH payout example",
+  "payload": {
+    "type": "GCASH",
+    "receiver": {
+      "surName": "Dela Cruz",
+      "givName": "Juan",
+      "phone": "639171234567"
+    },
+    "sender": {
+      "purposeOfRemittance": "FAMILY SUPPORT"
+    },
+    "account": "639171234567",
+    "receiveAmount": 5000.00,
+    "receiveCurrency": "PHP",
+    "channelCode": "73",
+    "channelName": "GCASH"
+  }
+}

@@ -26,6 +26,16 @@ Open `capitalist-api2.http` in IntelliJ IDEA and click the run gutter icon next 
 
 The pre-request handler imports `sign-capitalist.js` and sets per-request `timestamp` and `signature` variables.
 
+The collection is split by operation area:
+
+- `account/*.http` for account list and transaction history.
+- `exchange/*.http` for exchange creation and rates.
+- `merchant/*.http` for merchant orders.
+- `payments/*.http` for payment creation by channel.
+- `settings/*.http` for security settings exposed by the API, such as IP whitelist management.
+
+Open the file for the operation you want to test and replace placeholder values before sending a real request.
+
 Each request calculates:
 
 ```text

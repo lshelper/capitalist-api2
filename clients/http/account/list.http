@@ -1,0 +1,6 @@
+### List accounts
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+GET {{baseUrl}}/v1/account/list?currency={{currency}}
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}

@@ -1,0 +1,13 @@
+### Create exchange
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/exchange
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "fromAccount": "{{fromAccount}}",
+  "toAccount": "{{toAccount}}",
+  "amount": 100.00
+}

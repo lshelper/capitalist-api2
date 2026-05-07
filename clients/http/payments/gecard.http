@@ -1,0 +1,24 @@
+### GECARD payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "gecard-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "GECARD payout example",
+  "payload": {
+    "type": "GECARD",
+    "account": "5234567890123456",
+    "senderFirstname": "Giorgi",
+    "senderLastname": "Piponia",
+    "senderIdentityNumber": "01234567890",
+    "receiverFirstname": "Nino",
+    "receiverLastname": "Kupadze"
+  }
+}

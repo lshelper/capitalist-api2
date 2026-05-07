@@ -1,0 +1,19 @@
+### PAGS_CHWALLET payment
+< {% import { signCapitalistRequest } from "../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "pags-chwallet-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "PAGS_CHWALLET payout example",
+  "payload": {
+    "type": "PAGS_CHWALLET",
+    "account": "beneficiary@example.com"
+  }
+}
