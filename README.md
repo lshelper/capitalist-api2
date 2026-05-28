@@ -6,6 +6,23 @@ Official documentation: https://docs.capitalist.net/api/integration-api.html
 
 API base URL: `https://api2.capitalist.net/`
 
+## Documentation sync status
+
+Code, examples and shared API notes are current against the official documentation as of 2026-05-28.
+
+Stored upstream snapshot:
+
+- `docs/upstream/integration-api.html`
+- `docs/upstream/integration-api.md`
+
+When the official documentation changes:
+
+1. Run `scripts/update-upstream-docs.sh`.
+2. Review `git diff -- docs/upstream`.
+3. Update code, examples and `docs/api-surface.md` as needed.
+4. Update the current-against-official-documentation date in this section.
+5. Run the relevant client tests before committing.
+
 ## Repository layout
 
 ```text
