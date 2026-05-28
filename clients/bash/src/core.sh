@@ -34,10 +34,13 @@ capitalist_api2_verify_signature() {
   local body="${2:-}"
   local secret="$3"
   local signature="$4"
-  local expected
+  local expected expected_hash signature_hash
 
   expected="$(capitalist_api2_signature "$timestamp" "$body" "$secret")" || return 1
-  [ "$expected" = "$signature" ]
+  expected_hash="$(capitalist_api2_sha256_hex "$expected")" || return 1
+  signature_hash="$(capitalist_api2_sha256_hex "$signature")" || return 1
+
+  [ "$expected_hash" = "$signature_hash" ]
 }
 
 capitalist_api2_require_credentials() {
