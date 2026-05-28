@@ -17,6 +17,7 @@ clients/
   typescript/   TypeScript/Node.js client
 docs/
   api-surface.md
+  upstream/      Snapshot of the official upstream documentation
 ```
 
 Each client is intentionally self-contained: own README, examples, tests and package metadata where the language ecosystem expects it. Shared API decisions are documented in `docs/`.

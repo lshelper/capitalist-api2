@@ -15,6 +15,7 @@ fi
 mkdir -p "$OUT_DIR"
 
 curl -L --compressed -sS "$DOC_URL" -o "$HTML_FILE"
+perl -0pi -e 's/data-cfemail="[^"]+"/data-cfemail="__cfemail__"/g' "$HTML_FILE"
 pandoc -f html -t gfm --wrap=none "$HTML_FILE" -o "$MD_FILE"
 
 printf 'Updated upstream documentation snapshot from %s\n' "$DOC_URL"
