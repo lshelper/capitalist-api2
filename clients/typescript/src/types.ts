@@ -48,6 +48,19 @@ export interface PaymentStatus {
   callbackUrl?: string | null;
 }
 
+export interface PaymentCallback {
+  state: 'EXECUTED' | 'DECLINED' | string;
+  fee: number;
+  documentId: number;
+  comment?: string | null;
+  amount: number;
+  currency: Currency;
+  type: string;
+  accountFrom: string;
+  userRequestId: string;
+  callbackUrl: string;
+}
+
 export interface ListFilters {
   limit?: number;
   offset?: number;

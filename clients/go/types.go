@@ -54,6 +54,19 @@ type PaymentStatus struct {
 	CallbackURL   *string  `json:"callbackUrl,omitempty"`
 }
 
+type PaymentCallback struct {
+	State         string   `json:"state"`
+	Fee           float64  `json:"fee"`
+	DocumentID    int64    `json:"documentId"`
+	Comment       *string  `json:"comment,omitempty"`
+	Amount        float64  `json:"amount"`
+	Currency      Currency `json:"currency"`
+	Type          string   `json:"type"`
+	AccountFrom   string   `json:"accountFrom"`
+	UserRequestID string   `json:"userRequestId"`
+	CallbackURL   string   `json:"callbackUrl"`
+}
+
 type ListFilters struct {
 	Limit       int    `url:"limit"`
 	Offset      int    `url:"offset"`

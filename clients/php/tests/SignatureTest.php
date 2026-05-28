@@ -15,4 +15,14 @@ if ($actual !== $expected) {
     exit(1);
 }
 
+if (!Signature::verify($timestamp, $body, $secret, $expected)) {
+    fwrite(STDERR, "Expected signature verification to succeed\n");
+    exit(1);
+}
+
+if (Signature::verify($timestamp, $body . "\n", $secret, $expected)) {
+    fwrite(STDERR, "Expected signature verification to reject changed body\n");
+    exit(1);
+}
+
 echo "signature ok\n";

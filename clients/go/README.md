@@ -29,6 +29,14 @@ func main() {
 }
 ```
 
+## Callback verification
+
+Verify incoming payment callbacks against the raw request body:
+
+```go
+valid := capitalist.VerifySignature(timestampHeader, rawBody, apiSecret, signatureHeader)
+```
+
 ## Test
 
 ```bash

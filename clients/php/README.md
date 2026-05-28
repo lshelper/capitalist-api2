@@ -13,6 +13,16 @@ $client = new Client(getenv('CAPITALIST_API2_KEY'), getenv('CAPITALIST_API2_SECR
 $accounts = $client->listAccounts('USD');
 ```
 
+## Callback verification
+
+Verify incoming payment callbacks against the raw request body:
+
+```php
+use Capitalist\Api2\Signature;
+
+$valid = Signature::verify($timestampHeader, $rawBody, $apiSecret, $signatureHeader);
+```
+
 ## Test
 
 ```bash

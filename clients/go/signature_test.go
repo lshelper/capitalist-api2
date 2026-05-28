@@ -16,3 +16,20 @@ func TestCalculateSignatureDocumentationExample(t *testing.T) {
 		t.Fatal("VerifySignature() = false, want true")
 	}
 }
+
+func TestVerifySignatureRejectsChangedCallbackBody(t *testing.T) {
+	timestamp := "1678901234567"
+	body := []byte(`{"state":"EXECUTED","fee":1.12,"documentId":123,"comment":"Own funds","amount":100,"currency":"USD","type":"PAYONEER","accountFrom":"U0123504","userRequestId":"9876543219","callbackUrl":"https://some-domain.com/for-callbacks"}`)
+	secret := "somePrivateApiSecret"
+	signature := CalculateSignature(timestamp, body, secret)
+
+	if !VerifySignature(timestamp, body, secret, signature) {
+		t.Fatal("VerifySignature() = false, want true")
+	}
+
+	changedBody := append([]byte{}, body...)
+	changedBody = append(changedBody, '\n')
+	if VerifySignature(timestamp, changedBody, secret, signature) {
+		t.Fatal("VerifySignature() = true, want false")
+	}
+}

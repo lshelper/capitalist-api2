@@ -29,6 +29,17 @@ capitalist_api2_signature() {
   capitalist_api2_sha256_hex "${timestamp}${body}${secret}"
 }
 
+capitalist_api2_verify_signature() {
+  local timestamp="$1"
+  local body="${2:-}"
+  local secret="$3"
+  local signature="$4"
+  local expected
+
+  expected="$(capitalist_api2_signature "$timestamp" "$body" "$secret")" || return 1
+  [ "$expected" = "$signature" ]
+}
+
 capitalist_api2_require_credentials() {
   if [ -z "${CAPITALIST_API2_KEY:-}" ] || [ -z "${CAPITALIST_API2_SECRET:-}" ]; then
     printf 'capitalist-api2: set CAPITALIST_API2_KEY and CAPITALIST_API2_SECRET\n' >&2

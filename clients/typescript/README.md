@@ -13,6 +13,16 @@ const client = new CapitalistApi2Client({
 const accounts = await client.listAccounts('USD');
 ```
 
+## Callback verification
+
+Use the raw callback body exactly as it was received:
+
+```ts
+import { verifySignature } from './src';
+
+const valid = verifySignature(timestampHeader, rawBody, apiSecret, signatureHeader);
+```
+
 ## Test
 
 ```bash

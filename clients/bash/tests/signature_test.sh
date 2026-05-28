@@ -17,4 +17,15 @@ if [ "$actual" != "$expected" ]; then
   exit 1
 fi
 
+if ! capitalist_api2_verify_signature "$timestamp" "$body" "$secret" "$expected"; then
+  printf 'Expected signature verification to succeed\n' >&2
+  exit 1
+fi
+
+if capitalist_api2_verify_signature "$timestamp" "${body}
+" "$secret" "$expected"; then
+  printf 'Expected signature verification to reject changed body\n' >&2
+  exit 1
+fi
+
 printf 'signature ok\n'

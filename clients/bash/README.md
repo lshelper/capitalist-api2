@@ -15,6 +15,14 @@ capitalist_api2_list_accounts "USD"
 
 The client requires `curl` and either `openssl` or `shasum`.
 
+## Callback verification
+
+Verify incoming payment callbacks against the raw request body:
+
+```bash
+capitalist_api2_verify_signature "$timestamp_header" "$raw_body" "$api_secret" "$signature_header"
+```
+
 ## Payment creation helpers
 
 Payment channel helpers are loaded from `src/payments/create/*.sh`.
