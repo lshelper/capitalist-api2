@@ -1,0 +1,19 @@
+### USDTBSC payment
+< {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
+POST {{baseUrl}}/v1/payment
+API-Key: {{apiKey}}
+X-Request-Timestamp: {{timestamp}}
+Signature: {{signature}}
+Content-Type: application/json
+
+{
+  "userRequestId": "usdtbsc-{{$timestamp}}",
+  "accountFrom": "{{fromAccount}}",
+  "amount": 100,
+  "currency": "{{currency}}",
+  "comment": "USDTBSC payout example",
+  "payload": {
+    "type": "USDTBSC",
+    "account": "0x0000000000000000000000000000000000000000"
+  }
+}
