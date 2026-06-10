@@ -4,6 +4,7 @@ import type {
   Account,
   ClientOptions,
   Currency,
+  DepositAddressResponse,
   ExchangeRequest,
   KycStartRequest,
   KycStartResponse,
@@ -72,6 +73,14 @@ export class CapitalistApi2Client {
 
   getTransactions(filters: TransactionsFilters = {}): Promise<unknown> {
     return this.request('GET', '/v1/transactions', undefined, asQuery(filters));
+  }
+
+  getDepositAddress(currency: Currency): Promise<DepositAddressResponse> {
+    return this.request('GET', `/v1/depositAddress/${encodeURIComponent(currency)}`);
+  }
+
+  getAutoConvertedUSDTtDepositAddress(account: string): Promise<DepositAddressResponse> {
+    return this.request('GET', `/v1/depositAddressAutoUSDTt/${encodeURIComponent(account)}`);
   }
 
   startKyc(request: KycStartRequest): Promise<KycStartResponse> {

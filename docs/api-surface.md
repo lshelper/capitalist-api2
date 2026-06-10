@@ -46,12 +46,44 @@ Note: the official HTML page obfuscates the email inside the sample JSON. Becaus
 | Get payment by user request ID | GET | `/v1/payment/{userRequestId}` |
 | Get orders | GET | `/v1/orders` |
 | Get transactions | GET | `/v1/transactions` |
+| Get cryptocurrency deposit address | GET | `/v1/depositAddress/{currency}` |
+| Get USDT TRC-20 autoconversion deposit address | GET | `/v1/depositAddressAutoUSDTt/{account}` |
 | Start KYC | POST | `/v1/kyc/start` |
 | Get KYC status | GET | `/v1/kyc/status/{kycExternalUserId}/{sort}` |
 | Get KYC status by UUID | GET | `/v1/kyc/statusByUuid/{uuid}` |
 | Set KYC data | POST | `/v1/kyc/setData/{uuid}` |
 | Set KYC picture | POST | `/v1/kyc/setPicture/{uuid}/{type}` |
 | Confirm KYC | POST | `/v1/kyc/confirm/{uuid}` |
+
+## Cryptocurrency wallets
+
+Deposit address endpoints return cryptocurrency addresses for topping up Capitalist accounts.
+
+Important: do not save or cache deposit addresses. They are not permanent and are guaranteed to remain valid for at most 8 hours.
+
+Supported deposit address currency codes:
+
+- `BTC`
+- `ETH`
+- `USDT` - ERC-20
+- `USDC` - ERC-20
+- `USDTt` - TRC-20
+- `USDTb` - BEP-20 / BSC
+- `USDCb` - BEP-20 / BSC
+
+Response body:
+
+```json
+{
+  "address": "some your address"
+}
+```
+
+Response fields:
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `address` | string | Cryptocurrency deposit address. |
 
 ## Payment callbacks
 

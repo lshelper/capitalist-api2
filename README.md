@@ -8,7 +8,7 @@ API base URL: `https://api2.capitalist.net/`
 
 ## Documentation sync status
 
-Code, examples and shared API notes are current against the official documentation as of 2026-05-28.
+Code, examples and shared API notes are current against the official documentation as of 2026-06-10.
 
 Stored upstream snapshot:
 

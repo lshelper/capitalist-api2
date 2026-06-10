@@ -11,6 +11,7 @@ export CAPITALIST_API2_SECRET="your-api-secret"
 source ./src/capitalist-api2.sh
 
 capitalist_api2_list_accounts "USD"
+capitalist_api2_get_deposit_address "USDTb"
 ```
 
 The client requires `curl` and either `openssl` or `shasum`.
@@ -60,6 +61,7 @@ capitalist_api2_create_payment_capitalist
 - `src/payments/create.sh` and `src/payments/create/` for payment creation.
 - `src/payments/status.sh` for payment status lookup.
 - `src/settings/` for IP whitelist management.
+- `src/wallets/` for cryptocurrency deposit addresses.
 
 ## Test
 

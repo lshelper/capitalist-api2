@@ -1,4 +1,15 @@
-export type Currency = 'RUR' | 'USD' | 'EUR' | 'USDT' | 'USDTt' | 'ETH' | 'USDC' | 'BTC' | string;
+export type Currency =
+  | 'RUR'
+  | 'USD'
+  | 'EUR'
+  | 'USDT'
+  | 'USDTt'
+  | 'USDTb'
+  | 'ETH'
+  | 'USDC'
+  | 'USDCb'
+  | 'BTC'
+  | string;
 
 export interface ClientOptions {
   apiKey: string;
@@ -18,6 +29,10 @@ export interface ExchangeRequest {
   fromAccount: string;
   toAccount: string;
   amount: number;
+}
+
+export interface DepositAddressResponse {
+  address: string;
 }
 
 export interface PaymentRequest {

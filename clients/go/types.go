@@ -8,8 +8,10 @@ const (
 	CurrencyEUR   Currency = "EUR"
 	CurrencyUSDT  Currency = "USDT"
 	CurrencyUSDTt Currency = "USDTt"
+	CurrencyUSDTb Currency = "USDTb"
 	CurrencyETH   Currency = "ETH"
 	CurrencyUSDC  Currency = "USDC"
+	CurrencyUSDCb Currency = "USDCb"
 	CurrencyBTC   Currency = "BTC"
 )
 
@@ -24,6 +26,10 @@ type ExchangeRequest struct {
 	FromAccount string  `json:"fromAccount"`
 	ToAccount   string  `json:"toAccount"`
 	Amount      float64 `json:"amount"`
+}
+
+type DepositAddressResponse struct {
+	Address string `json:"address"`
 }
 
 type PaymentRequest struct {

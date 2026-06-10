@@ -26,6 +26,13 @@ func main() {
 	}
 
 	fmt.Println(accounts)
+
+	address, err := client.GetDepositAddress(context.Background(), capitalist.CurrencyUSDTb)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(address.Address)
 }
 ```
 

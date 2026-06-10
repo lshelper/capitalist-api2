@@ -35,6 +35,7 @@ The collection is split by operation area:
 - `payments/create/*.http` for payment creation by channel.
 - `payments/status/*.http` for payment status lookup.
 - `settings/*.http` for security settings exposed by the API, such as IP whitelist management.
+- `wallets/*.http` for cryptocurrency deposit addresses.
 
 Open the file for the operation you want to test and replace placeholder values before sending a real request.
 

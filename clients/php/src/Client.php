@@ -76,6 +76,16 @@ final class Client
         return $this->request('GET', '/v1/transactions', null, $filters);
     }
 
+    public function getDepositAddress($currency)
+    {
+        return $this->request('GET', '/v1/depositAddress/' . rawurlencode($currency));
+    }
+
+    public function getAutoConvertedUsdtTrc20DepositAddress($account)
+    {
+        return $this->request('GET', '/v1/depositAddressAutoUSDTt/' . rawurlencode($account));
+    }
+
     public function startKyc(array $request)
     {
         return $this->request('POST', '/v1/kyc/start', $request);

@@ -118,6 +118,18 @@ func (c *Client) GetTransactions(ctx context.Context, filters TransactionsFilter
 	return result, err
 }
 
+func (c *Client) GetDepositAddress(ctx context.Context, currency Currency) (DepositAddressResponse, error) {
+	var result DepositAddressResponse
+	err := c.requestJSON(ctx, http.MethodGet, "/v1/depositAddress/"+url.PathEscape(string(currency)), nil, nil, &result)
+	return result, err
+}
+
+func (c *Client) GetAutoConvertedUSDTtDepositAddress(ctx context.Context, account string) (DepositAddressResponse, error) {
+	var result DepositAddressResponse
+	err := c.requestJSON(ctx, http.MethodGet, "/v1/depositAddressAutoUSDTt/"+url.PathEscape(account), nil, nil, &result)
+	return result, err
+}
+
 func (c *Client) StartKYC(ctx context.Context, request KYCStartRequest) (KYCStartResponse, error) {
 	var result KYCStartResponse
 	err := c.requestJSON(ctx, http.MethodPost, "/v1/kyc/start", request, nil, &result)

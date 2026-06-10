@@ -11,6 +11,7 @@ const client = new CapitalistApi2Client({
 });
 
 const accounts = await client.listAccounts('USD');
+const depositAddress = await client.getDepositAddress('USDTb');
 ```
 
 ## Callback verification
