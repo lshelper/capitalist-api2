@@ -35,13 +35,16 @@ Table of Contents
     - [4.5.1. Get Orders](#_get_orders)
   - [4.6. List of transactions](#_list_of_transactions)
     - [4.6.1. Get Transactions](#_get_transactions)
-  - [4.7. KYC](#_kyc)
-    - [4.7.1. Initiate new KYC](#_initiate_new_kyc)
-    - [4.7.2. Query KYC status](#_query_kyc_status)
-    - [4.7.3. Query KYC status by UUID](#_query_kyc_status_by_uuid)
-    - [4.7.4. Fill KYC data](#_fill_kyc_data)
-    - [4.7.5. Add KYC picture](#_add_kyc_picture)
-    - [4.7.6. Send KYC for verification](#_send_kyc_for_verification)
+  - [4.7. Cryptocurrency wallets](#_cryptocurrency_wallets)
+    - [4.7.1. Get address for cryptocurrency deposit](#_get_address_for_cryptocurrency_deposit)
+    - [4.7.2. Get address for cryptocurrency deposit (in USDT TRC-20) with autoconversion](#_get_address_for_cryptocurrency_deposit_in_usdt_trc_20_with_autoconversion)
+  - [4.8. KYC](#_kyc)
+    - [4.8.1. Initiate new KYC](#_initiate_new_kyc)
+    - [4.8.2. Query KYC status](#_query_kyc_status)
+    - [4.8.3. Query KYC status by UUID](#_query_kyc_status_by_uuid)
+    - [4.8.4. Fill KYC data](#_fill_kyc_data)
+    - [4.8.5. Add KYC picture](#_add_kyc_picture)
+    - [4.8.6. Send KYC for verification](#_send_kyc_for_verification)
 - [5. Payment Callbacks](#_payment_callbacks)
   - [5.1. Callback Headers](#_callback_headers)
   - [5.2. Callback Body Fields](#_callback_body_fields)
@@ -1097,11 +1100,169 @@ Returns an array of transactions.
 
 <div class="sect2">
 
-### 4.7. KYC
+### 4.7. Cryptocurrency wallets
 
 <div class="sect3">
 
-#### 4.7.1. Initiate new KYC
+#### 4.7.1. Get address for cryptocurrency deposit
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/depositAddress/{currency}`
+
+</div>
+
+<div class="paragraph">
+
+Returns address for cryptocurrency deposits. IMPORTANT: Do not attempt to save or cache addresses. They are not permanent and will change. Maximum guarantee: the returned address will be valid for 8 hours.
+
+</div>
+
+<div class="sect4">
+
+##### Required Fields
+
+| Field | Type | Description |
+|----|----|----|
+| `currency` | string | Must be "BTC", "ETH", "USDT", "USDC", "USDTt", "USDCb" or "USDTb" |
+
+<div class="paragraph">
+
+NOTE:
+
+</div>
+
+<div class="ulist">
+
+- BTC - for Bitcoin
+
+- ETH - for Ethereum
+
+- USDT - USDT on ERC-20 network (Ethereum)
+
+- USDTt - USDT on TRC-20 network (Tron)
+
+- USDC - USDC on ERC-20 network (Ethereum)
+
+- USDTb - USDT on BEP-20 network (BSC)
+
+- USDCb - USDC on BEP-20 network (BSC)
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+If the request is successful, the API returns the wallet address.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+{
+  "address": "some your address",
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response Fields
+
+| Field     | Type   | Description                                   |
+|-----------|--------|-----------------------------------------------|
+| `address` | string | The address you can use to topup your account |
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### 4.7.2. Get address for cryptocurrency deposit (in USDT TRC-20) with autoconversion
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/depositAddressAutoUSDTt/{account}`
+
+</div>
+
+<div class="paragraph">
+
+Returns address for cryptocurrency deposits in USDT TRC-20 which will be automatically converted to given account. IMPORTANT: Do not attempt to save or cache addresses. They are not permanent and will change. Maximum guarantee: the returned address will be valid for 8 hours.
+
+</div>
+
+<div class="sect4">
+
+##### Required Fields
+
+| Field     | Type   | Description                                          |
+|-----------|--------|------------------------------------------------------|
+| `account` | string | Account code to which your deposits will be credited |
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+If the request is successful, the API returns the wallet address.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+{
+  "address": "some your address",
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response Fields
+
+| Field     | Type   | Description                                   |
+|-----------|--------|-----------------------------------------------|
+| `address` | string | The address you can use to topup your account |
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### 4.8. KYC
+
+<div class="sect3">
+
+#### 4.8.1. Initiate new KYC
 
 <div class="paragraph">
 
@@ -1210,7 +1371,7 @@ If the request is successful, the API returns a JSON object containing the URL t
 
 <div class="sect3">
 
-#### 4.7.2. Query KYC status
+#### 4.8.2. Query KYC status
 
 <div class="paragraph">
 
@@ -1287,7 +1448,7 @@ If the request is successful, the API returns a JSON object containing the URL t
 
 <div class="sect3">
 
-#### 4.7.3. Query KYC status by UUID
+#### 4.8.3. Query KYC status by UUID
 
 <div class="paragraph">
 
@@ -1363,7 +1524,7 @@ If the request is successful, the API returns a JSON object containing the URL t
 
 <div class="sect3">
 
-#### 4.7.4. Fill KYC data
+#### 4.8.4. Fill KYC data
 
 <div class="paragraph">
 
@@ -1409,7 +1570,7 @@ If the request is successful, the API returns http code 200.
 
 <div class="sect3">
 
-#### 4.7.5. Add KYC picture
+#### 4.8.5. Add KYC picture
 
 <div class="paragraph">
 
@@ -1456,7 +1617,7 @@ If the request is successful, the API returns http code 200.
 
 <div class="sect3">
 
-#### 4.7.6. Send KYC for verification
+#### 4.8.6. Send KYC for verification
 
 <div class="paragraph">
 
@@ -3346,8 +3507,10 @@ When an error occurs, the API returns a JSON object with an error description.
 | EUR           | European EURO   |
 | USDT          | USDT (Erc 20)   |
 | USDTt         | USDT (Trc 20)   |
+| USDTb         | USDT (Bep 20)   |
 | ETH           | Ethereum        |
 | USDC          | USDC (Erc 20)   |
+| USDCb         | USDC (Bep 20)   |
 | BTC           | Bitcoin         |
 
 </div>
@@ -3466,7 +3629,7 @@ For technical support and questions about the API integration, please contact su
 
 <div id="footer-text">
 
-Last updated 2026-05-28 12:20:45 UTC
+Last updated 2026-06-02 12:39:13 UTC
 
 </div>
 
