@@ -69,7 +69,6 @@ Table of Contents
     - [6.2.7. SOUTH_KOREA_BANK - South Korean Banks](#_south_korea_bank_south_korean_banks)
   - [6.3. Mobile Payments](#_mobile_payments)
     - [6.3.1. MEGAFON / TMOBILE / BEELINE / MTS / TELE2 / YOTA](#_megafon_tmobile_beeline_mts_tele2_yota)
-    - [6.3.2. UKR_MOBILE - Ukrainian Mobile Payments](#_ukr_mobile_ukrainian_mobile_payments)
   - [6.4. Fast Payment Systems](#_fast_payment_systems)
     - [6.4.1. SBP - Russian Fast Payment System / "Система Быстрых Платежей"](#_sbp_russian_fast_payment_system_система_быстрых_платежей)
     - [6.4.2. IMPS - Immediate Payment Service (India)](#_imps_immediate_payment_service_india)
@@ -89,8 +88,16 @@ Table of Contents
     - [6.6.1. BITCOIN / ETH / USDCERC20 / USDTERC20 / USDTTRC20 / USDCBSC / USDTBSC](#_bitcoin_eth_usdcerc20_usdterc20_usdttrc20_usdcbsc_usdtbsc)
   - [6.7. STEAM](#_steam)
     - [6.7.1. STEAM RUR ACCOUNTS](#_steam_rur_accounts)
-  - [6.8. CAPITALIST](#_capitalist)
-    - [6.8.1. CAPITALIST INTERNAL PAYMENTS](#_capitalist_internal_payments)
+  - [6.8. Steam account topup](#_steam_account_topup)
+    - [6.8.1. Payment format](#_payment_format)
+    - [6.8.2. Dictionary "services"](#_dictionary_services)
+    - [6.8.3. Dictionary "regions"](#_dictionary_regions)
+  - [6.9. Apple/Google/Steam/PlayStation/Xbox/Netflix/Spotify prepaid card](#_applegooglesteamplaystationxboxnetflixspotify_prepaid_card)
+    - [6.9.1. Payment format](#_payment_format_2)
+    - [6.9.2. Dictionary "Products"](#_dictionary_products)
+    - [6.9.3. Dictionary "Denominations"](#_dictionary_denominations)
+  - [6.10. CAPITALIST](#_capitalist)
+    - [6.10.1. CAPITALIST INTERNAL PAYMENTS](#_capitalist_internal_payments)
 - [7. Error Handling](#_error_handling)
   - [7.1. Error Response](#_error_response)
   - [7.2. HTTP Status Codes](#_http_status_codes)
@@ -440,8 +447,8 @@ Retrieves a list of accounts filtered by currency.
 <td class="tableblock halign-left valign-top"><p><code>currency</code></p></td>
 <td class="tableblock halign-left valign-top"><p>string</p></td>
 <td class="tableblock halign-left valign-top"><p>Yes</p></td>
-<td class="tableblock halign-left valign-top"><p>Currency code to filter accounts (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDC).</p>
-<p>Note: USDT - for ERC-20, USDTt - for TRC-20R)</p></td>
+<td class="tableblock halign-left valign-top"><p>Currency code to filter accounts (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDTb, USDC, USDCb).</p>
+<p>Note: USDT - for ERC-20, USDTt - for TRC-20, USDTb - for BEP-20 (Binance Smart Chain), USDC - for ERC-20, USDCb - for BEP-20 (Binance Smart Chain)</p></td>
 </tr>
 </tbody>
 </table>
@@ -716,7 +723,7 @@ Warning
 | `userRequestId` | string | Yes | Your unique transaction identifier |
 | `accountFrom` | string | Yes | Your account number from which funds will be withdrawn |
 | `amount` | number | Yes | Transaction amount in account currency or in the specified currency |
-| `currency` | string | No | Currency code (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDC). Note: USDT - for ERC-20, USDTt - for TRC-20 |
+| `currency` | string | No | Currency code (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDTb, USDC, USDCb). Note: USDT - for ERC-20, USDTt - for TRC-20, USDTb - for BEP-20 (Binance Smart Chain), USDC - for ERC-20, USDCb - for BEP-20 (Binance Smart Chain) |
 | `comment` | string | No | Optional transaction comment |
 | `callbackUrl` | string | No | URL where the system will send callback notifications about transaction status |
 | `payload` | object | Yes | Payment-specific data. Required fields depend on the payment channel type |
@@ -814,6 +821,17 @@ Retrieves the current status and details of a payment by its document ID. The re
 </div>
 
 </div>
+
+</div>
+
+<div class="sect4">
+
+##### Additional response Fields
+
+| Field | Type | Description |
+|----|----|----|
+| `txId` | string | Transaction ID for crypto transfers |
+| `dstAddress` | string | Destination address for incoming crypto transfers (the receiver address, your one) |
 
 </div>
 
@@ -1047,12 +1065,13 @@ Returns an array of transactions.
             "transactionId": 8367664,
             "createDate": "2014-02-18T21:47:29.452Z",
             "executeDate": "2014-02-18T21:47:39.543Z",
-            "type": "EXTERNALOUT",
+            "type": "OUT",
             "state": "EXECUTED",
             "amount": 500.00000000,
             "currency": "USD",
             "planDate": "2014-02-18T21:21:53.314Z",
-            "version": 1
+            "version": 1,
+            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201"
         }
     ],
     "count": 123
@@ -1080,17 +1099,19 @@ Returns an array of transactions.
 
 ##### Transaction Object Fields
 
-| Field           | Type   | Description                           |
-|-----------------|--------|---------------------------------------|
+| Field | Type | Description |
+|----|----|----|
 | `transactionId` | number | Unique identifier of the transaction. |
-| `createDate`    | string | Date of creation in ISO 8601 format.  |
-| `executeDate`   | string | Date of execution in ISO 8601 format. |
-| `type`          | string | Transaction type                      |
-| `state`         | string | Transaction state                     |
-| `amount`        | number | Transaction amount                    |
-| `currency`      | string | Currency code                         |
-| `planDate`      | string | Date of plan in ISO 8601 format.      |
-| `version`       | number | Transaction version                   |
+| `createDate` | string | Date of creation in ISO 8601 format. |
+| `executeDate` | string | Date of execution in ISO 8601 format. |
+| `type` | string | Transaction type |
+| `state` | string | Transaction state |
+| `amount` | number | Transaction amount |
+| `currency` | string | Currency code |
+| `planDate` | string | Date of plan in ISO 8601 format. |
+| `version` | number | Transaction version |
+| `txId` | string | Transaction ID for crypto transfers |
+| `dstAddress` | string | Destination address for incoming crypto transfers (the receiver address, your one) |
 
 </div>
 
@@ -2522,50 +2543,6 @@ Digital wallets and Russian mobile carrier payments.
 
 </div>
 
-<div class="sect3">
-
-#### 6.3.2. UKR_MOBILE - Ukrainian Mobile Payments
-
-<div class="paragraph">
-
-Payments via Ukrainian mobile operators.
-
-</div>
-
-<div class="sect4">
-
-##### Required Fields
-
-| Field     | Type   | Description                          |
-|-----------|--------|--------------------------------------|
-| `type`    | string | Must be "UKR_MOBILE"                 |
-| `account` | string | Ukrainian phone number (digits only) |
-
-</div>
-
-<div class="sect4">
-
-##### Example Payload
-
-<div class="listingblock">
-
-<div class="content">
-
-``` highlightjs
-{
-  "type": "UKR_MOBILE",
-  "account": "380501234567"
-}
-```
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 <div class="sect2">
@@ -3391,11 +3368,389 @@ Top up Steam account balance in rubles
 
 <div class="sect2">
 
-### 6.8. CAPITALIST
+### 6.8. Steam account topup
 
 <div class="sect3">
 
-#### 6.8.1. CAPITALIST INTERNAL PAYMENTS
+#### 6.8.1. Payment format
+
+<div class="paragraph">
+
+Top up Steam account balance
+
+</div>
+
+<div class="paragraph">
+
+Note: The "amount" field must be calculated manually (as quantity \* unfixedRate). If the price or rate changes, the payment will be declined.
+
+</div>
+
+<div class="sect4">
+
+##### Required Fields
+
+| Field | Type | Description |
+|----|----|----|
+| `serviceId` | number | Id of service to topup (see "Services dictionary" for details) |
+| `account` | string | Account name to topup |
+| `quantity` | number | Quantity of items you want to topup |
+| `region` | string | Region of your account (required for services with region, not needed for others) (see "Region dictionary" for details) |
+| `type` | string | Must be "TOPUP_SERVICE" |
+
+</div>
+
+<div class="sect4">
+
+##### Example Payload
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+{
+  "serviceId": "34",
+  "account": "myNastyAccountId_notNickName",
+  "quantity": 100500,
+  "region": "Macau"
+  "type": "TOPUP_SERVICE"
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### 6.8.2. Dictionary "services"
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/prepaid2/services`
+
+</div>
+
+<div class="paragraph">
+
+Retrieves the services dictionary.
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+API returns list of services for topup.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+[
+   {
+      "description" : "Adding funds to your Steam wallet in KZT currency, which can be spent on games, add-ons and other items in the store.",
+      "hasRegion" : false,
+      "id" : 3,
+      "name" : "Steam",
+      "type" : "unfixed",
+      "unfixedCurrency" : "KZT",
+      "unfixedRate" : 0.00205482
+   },
+   ...
+]
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response Fields
+
+| Field | Type | Description |
+|----|----|----|
+| `description` | string | Description of service |
+| `hasRegion` | boolean | Whether or not you need to specify the region of your account |
+| `name` | string | Name of service |
+| `id` | number | Id of service |
+| `type` | string | For TOPUP_SERVICE you can use only items with `type`="unfixed" |
+| `unfixedCurrency` | string | The currency in which the service operates |
+| `unfixedRate` | string | number exchange rate in which the service operates for USD |
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### 6.8.3. Dictionary "regions"
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/prepaid2/regions`
+
+</div>
+
+<div class="paragraph">
+
+Retrieves the regions dictionary.
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+API returns list of regions.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+[
+   "Asia",
+   "America",
+   "Europe",
+   "Taiwan",
+   "Hong Kong",
+   "Macau"
+]
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### 6.9. Apple/Google/Steam/PlayStation/Xbox/Netflix/Spotify prepaid card
+
+<div class="sect3">
+
+#### 6.9.1. Payment format
+
+<div class="paragraph">
+
+Buy prepaid card for Google/Apple/Steam/etc
+
+</div>
+
+<div class="paragraph">
+
+Note: The "amount" field must be calculated manually (as denomination.price). If the price changes, the payment will be declined.
+
+</div>
+
+<div class="sect4">
+
+##### Required Fields
+
+| Field | Type | Description |
+|----|----|----|
+| `productId` | number | Id of product for card (see "Products dictionary" for details) |
+| `denominationId` | number | Id of product for card (see "Denominations dictionary" for details) |
+| `type` | string | Must be "BUY_ITEM" |
+
+</div>
+
+<div class="sect4">
+
+##### Example Payload
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+{
+  "productId": 14,
+  "denominationId": 59,
+  "type": "BUY_ITEM"
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### 6.9.2. Dictionary "Products"
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/prepaid2/products`
+
+</div>
+
+<div class="paragraph">
+
+Retrieves the products dictionary.
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+API returns list of services for topup.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+[
+   {
+      "category" : "Gift Card, PlayStation",
+      "description" : "PlayStation Store Wallet gift cards are ...(cut)",
+      "id" : 98,
+      "instruction" : "1. Log in to your PlayStation Network account ...(cut)",
+      "name" : "PlayStation Store Wallet United Kingdom"
+   },
+   ...
+]
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response Fields
+
+| Field         | Type   | Description                       |
+|---------------|--------|-----------------------------------|
+| `description` | string | Description of product            |
+| `category`    | string | Category of product               |
+| `name`        | string | Name of product                   |
+| `id`          | number | Id of service                     |
+| `instruction` | string | Instruction for your prepaid card |
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### 6.9.3. Dictionary "Denominations"
+
+<div class="paragraph">
+
+**Endpoint:** `GET /v1/prepaid2/denominations?productid=id`
+
+</div>
+
+<div class="paragraph">
+
+Retrieves the denominations dictionary for given product.
+
+</div>
+
+<div class="sect4">
+
+##### Request Fields
+
+| Field       | Type   | Required | Description                           |
+|-------------|--------|----------|---------------------------------------|
+| `productid` | number | Yes      | Product Id to list denominations for. |
+
+</div>
+
+<div class="sect4">
+
+##### Response
+
+<div class="paragraph">
+
+API returns list of denominations.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlightjs
+[
+   {
+      "id" : 527,
+      "name" : "10 GPB",
+      "price" : 13.45,
+      "stock" : 5,
+      "value" : "10 GPB"
+   },
+   ...
+]
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect4">
+
+##### Response Fields
+
+| Field   | Type   | Description                     |
+|---------|--------|---------------------------------|
+| `id`    | number | Id of denomination              |
+| `name`  | string | Name of denomination            |
+| `price` | number | Price of denomination in USD    |
+| `stock` | number | Amount of denomination in stock |
+| `value` | string | Value of denomination           |
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### 6.10. CAPITALIST
+
+<div class="sect3">
+
+#### 6.10.1. CAPITALIST INTERNAL PAYMENTS
 
 <div class="paragraph">
 
@@ -3500,18 +3855,18 @@ When an error occurs, the API returns a JSON object with an error description.
 
 ### 8.1. Currency
 
-| Currency Code | Description     |
-|---------------|-----------------|
-| RUR           | Russian Roubles |
-| USD           | U.S. Dollars    |
-| EUR           | European EURO   |
-| USDT          | USDT (Erc 20)   |
-| USDTt         | USDT (Trc 20)   |
-| USDTb         | USDT (Bep 20)   |
-| ETH           | Ethereum        |
-| USDC          | USDC (Erc 20)   |
-| USDCb         | USDC (Bep 20)   |
-| BTC           | Bitcoin         |
+| Currency Code | Description                         |
+|---------------|-------------------------------------|
+| RUR           | Russian Roubles                     |
+| USD           | U.S. Dollars                        |
+| EUR           | European EURO                       |
+| USDT          | USDT (Erc 20)                       |
+| USDTt         | USDT (Trc 20)                       |
+| USDTb         | USDT (Bep 20 - Binance Smart Chain) |
+| ETH           | Ethereum                            |
+| USDC          | USDC (Erc 20)                       |
+| USDCb         | USDC (Bep 20 - Binance Smart Chain) |
+| BTC           | Bitcoin                             |
 
 </div>
 
@@ -3629,7 +3984,7 @@ For technical support and questions about the API integration, please contact su
 
 <div id="footer-text">
 
-Last updated 2026-06-02 12:39:13 UTC
+Last updated 2026-07-02 13:08:04 UTC
 
 </div>
 

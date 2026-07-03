@@ -547,7 +547,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_mobile_payments">6.3. Mobile Payments</a>
 <ul class="sectlevel3">
 <li><a href="#_megafon_tmobile_beeline_mts_tele2_yota">6.3.1. MEGAFON / TMOBILE / BEELINE / MTS / TELE2 / YOTA</a></li>
-<li><a href="#_ukr_mobile_ukrainian_mobile_payments">6.3.2. UKR_MOBILE - Ukrainian Mobile Payments</a></li>
 </ul>
 </li>
 <li><a href="#_fast_payment_systems">6.4. Fast Payment Systems</a>
@@ -581,9 +580,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_steam_rur_accounts">6.7.1. STEAM RUR ACCOUNTS</a></li>
 </ul>
 </li>
-<li><a href="#_capitalist">6.8. CAPITALIST</a>
+<li><a href="#_steam_account_topup">6.8. Steam account topup</a>
 <ul class="sectlevel3">
-<li><a href="#_capitalist_internal_payments">6.8.1. CAPITALIST INTERNAL PAYMENTS</a></li>
+<li><a href="#_payment_format">6.8.1. Payment format</a></li>
+<li><a href="#_dictionary_services">6.8.2. Dictionary "services"</a></li>
+<li><a href="#_dictionary_regions">6.8.3. Dictionary "regions"</a></li>
+</ul>
+</li>
+<li><a href="#_applegooglesteamplaystationxboxnetflixspotify_prepaid_card">6.9. Apple/Google/Steam/PlayStation/Xbox/Netflix/Spotify prepaid card</a>
+<ul class="sectlevel3">
+<li><a href="#_payment_format_2">6.9.1. Payment format</a></li>
+<li><a href="#_dictionary_products">6.9.2. Dictionary "Products"</a></li>
+<li><a href="#_dictionary_denominations">6.9.3. Dictionary "Denominations"</a></li>
+</ul>
+</li>
+<li><a href="#_capitalist">6.10. CAPITALIST</a>
+<ul class="sectlevel3">
+<li><a href="#_capitalist_internal_payments">6.10.1. CAPITALIST INTERNAL PAYMENTS</a></li>
 </ul>
 </li>
 </ul>
@@ -873,8 +886,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>currency</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Currency code to filter accounts (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDC).</p>
-<p class="tableblock">Note: USDT - for ERC-20, USDTt - for TRC-20R)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Currency code to filter accounts (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDTb, USDC, USDCb).</p>
+<p class="tableblock">Note: USDT - for ERC-20, USDTt - for TRC-20, USDTb - for BEP-20 (Binance Smart Chain), USDC - for ERC-20, USDCb - for BEP-20 (Binance Smart Chain)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1152,8 +1165,8 @@ Not all payment channels listed in the documentation may be currently available.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>currency</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Currency code (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDC).
-Note: USDT - for ERC-20, USDTt - for TRC-20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Currency code (e.g., USD, EUR, RUR, BTC, USDT, USDTt, USDTb, USDC, USDCb).
+Note: USDT - for ERC-20, USDTt - for TRC-20, USDTb - for BEP-20 (Binance Smart Chain), USDC - for ERC-20, USDCb - for BEP-20 (Binance Smart Chain)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>comment</code></p></td>
@@ -1269,6 +1282,35 @@ The response also includes all payment fields as originally submitted, as well a
 }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_additional_response_fields">Additional response Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>txId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transaction ID for crypto transfers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dstAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination address for incoming crypto transfers (the receiver address, your one)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1669,12 +1711,13 @@ The response also includes all payment fields as originally submitted, as well a
             "transactionId": 8367664,
             "createDate": "2014-02-18T21:47:29.452Z",
             "executeDate": "2014-02-18T21:47:39.543Z",
-            "type": "EXTERNALOUT",
+            "type": "OUT",
             "state": "EXECUTED",
             "amount": 500.00000000,
             "currency": "USD",
             "planDate": "2014-02-18T21:21:53.314Z",
-            "version": 1
+            "version": 1,
+            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201"
         }
     ],
     "count": 123
@@ -1771,6 +1814,16 @@ The response also includes all payment fields as originally submitted, as well a
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transaction version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>txId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transaction ID for crypto transfers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dstAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination address for incoming crypto transfers (the receiver address, your one)</p></td>
 </tr>
 </tbody>
 </table>
@@ -3478,52 +3531,6 @@ Not all payment channels listed in the documentation may be currently available.
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ukr_mobile_ukrainian_mobile_payments">6.3.2. UKR_MOBILE - Ukrainian Mobile Payments</h4>
-<div class="paragraph">
-<p>Payments via Ukrainian mobile operators.</p>
-</div>
-<div class="sect4">
-<h5 id="_required_fields_19">Required Fields</h5>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 60%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Must be "UKR_MOBILE"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>account</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ukrainian phone number (digits only)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_example_payload_14">Example Payload</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "type": "UKR_MOBILE",
-  "account": "380501234567"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_fast_payment_systems">6.4. Fast Payment Systems</h3>
@@ -3533,7 +3540,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>System for instant payments in Russia.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_20">Required Fields</h5>
+<h5 id="_required_fields_19">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3582,7 +3589,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_15">Example Payload</h5>
+<h5 id="_example_payload_14">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3603,7 +3610,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>India&#8217;s real-time interbank electronic funds transfer system.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_21">Required Fields</h5>
+<h5 id="_required_fields_20">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3642,7 +3649,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_16">Example Payload</h5>
+<h5 id="_example_payload_15">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3664,7 +3671,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>International digital payment platform for cross-border transfers.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_22">Required Fields</h5>
+<h5 id="_required_fields_21">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3693,7 +3700,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_17">Example Payload</h5>
+<h5 id="_example_payload_16">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3710,7 +3717,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Electronic wallets in euros via Neteller or Skrill.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_23">Required Fields</h5>
+<h5 id="_required_fields_22">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3789,7 +3796,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_18">Example Payload</h5>
+<h5 id="_example_payload_17">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3816,7 +3823,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Indian digital payments and mobile wallet platform.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_24">Required Fields</h5>
+<h5 id="_required_fields_23">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3845,7 +3852,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_19">Example Payload</h5>
+<h5 id="_example_payload_18">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3862,7 +3869,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Digital wallet and mobile payment service (Philippines).</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_25">Required Fields</h5>
+<h5 id="_required_fields_24">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3941,7 +3948,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_20">Example Payload</h5>
+<h5 id="_example_payload_19">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -3970,7 +3977,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>WebMoney payments.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_26">Required Fields</h5>
+<h5 id="_required_fields_25">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3999,7 +4006,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_21">Example Payload</h5>
+<h5 id="_example_payload_20">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4016,7 +4023,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Vita wallet Chile payments.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_27">Required Fields</h5>
+<h5 id="_required_fields_26">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4045,7 +4052,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_22">Example Payload</h5>
+<h5 id="_example_payload_21">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4062,7 +4069,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Mexican SPEI</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_28">Required Fields</h5>
+<h5 id="_required_fields_27">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4116,7 +4123,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_23">Example Payload</h5>
+<h5 id="_example_payload_22">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4138,7 +4145,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Colombian Nequi, Tpaga</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_29">Required Fields</h5>
+<h5 id="_required_fields_28">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4177,7 +4184,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_24">Example Payload</h5>
+<h5 id="_example_payload_23">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4196,7 +4203,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Colombian Transfiya</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_30">Required Fields</h5>
+<h5 id="_required_fields_29">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4240,7 +4247,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_25">Example Payload</h5>
+<h5 id="_example_payload_24">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4260,7 +4267,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>ZaloPay payments.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_31">Required Fields</h5>
+<h5 id="_required_fields_30">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4309,7 +4316,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_26">Example Payload</h5>
+<h5 id="_example_payload_25">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4339,7 +4346,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>bKash payments.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_32">Required Fields</h5>
+<h5 id="_required_fields_31">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4388,7 +4395,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_27">Example Payload</h5>
+<h5 id="_example_payload_26">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4430,7 +4437,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Cryptocurrency payments for Bitcoin, Ethereum, and various stablecoins.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_33">Required Fields</h5>
+<h5 id="_required_fields_32">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4459,7 +4466,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_28">Example Payload</h5>
+<h5 id="_example_payload_27">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4501,7 +4508,7 @@ Not all payment channels listed in the documentation may be currently available.
 <p>Top up Steam account balance in rubles</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_34">Required Fields</h5>
+<h5 id="_required_fields_33">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4530,7 +4537,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_29">Example Payload</h5>
+<h5 id="_example_payload_28">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4543,14 +4550,427 @@ Not all payment channels listed in the documentation may be currently available.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_capitalist">6.8. CAPITALIST</h3>
+<h3 id="_steam_account_topup">6.8. Steam account topup</h3>
 <div class="sect3">
-<h4 id="_capitalist_internal_payments">6.8.1. CAPITALIST INTERNAL PAYMENTS</h4>
+<h4 id="_payment_format">6.8.1. Payment format</h4>
+<div class="paragraph">
+<p>Top up Steam account balance</p>
+</div>
+<div class="paragraph">
+<p>Note: The "amount" field must be calculated manually (as quantity * unfixedRate). If the price or rate changes, the payment will be declined.</p>
+</div>
+<div class="sect4">
+<h5 id="_required_fields_34">Required Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serviceId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of service to topup (see "Services dictionary" for details)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>account</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Account name to topup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>quantity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quantity of items you want to topup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Region of your account (required for services with region, not needed for others) (see "Region dictionary" for details)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be "TOPUP_SERVICE"</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_example_payload_29">Example Payload</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "serviceId": "34",
+  "account": "myNastyAccountId_notNickName",
+  "quantity": 100500,
+  "region": "Macau"
+  "type": "TOPUP_SERVICE"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dictionary_services">6.8.2. Dictionary "services"</h4>
+<div class="paragraph">
+<p><strong>Endpoint:</strong> <code>GET /v1/prepaid2/services</code></p>
+</div>
+<div class="paragraph">
+<p>Retrieves the services dictionary.</p>
+</div>
+<div class="sect4">
+<h5 id="_response_17">Response</h5>
+<div class="paragraph">
+<p>API returns list of services for topup.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+   {
+      "description" : "Adding funds to your Steam wallet in KZT currency, which can be spent on games, add-ons and other items in the store.",
+      "hasRegion" : false,
+      "id" : 3,
+      "name" : "Steam",
+      "type" : "unfixed",
+      "unfixedCurrency" : "KZT",
+      "unfixedRate" : 0.00205482
+   },
+   ...
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_fields_11">Response Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description of service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hasRegion</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not you need to specify the region of your account</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For TOPUP_SERVICE you can use only items with <code>type</code>="unfixed"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unfixedCurrency</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The currency in which the service operates</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unfixedRate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number exchange rate in which the service operates for USD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dictionary_regions">6.8.3. Dictionary "regions"</h4>
+<div class="paragraph">
+<p><strong>Endpoint:</strong> <code>GET /v1/prepaid2/regions</code></p>
+</div>
+<div class="paragraph">
+<p>Retrieves the regions dictionary.</p>
+</div>
+<div class="sect4">
+<h5 id="_response_18">Response</h5>
+<div class="paragraph">
+<p>API returns list of regions.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+   "Asia",
+   "America",
+   "Europe",
+   "Taiwan",
+   "Hong Kong",
+   "Macau"
+]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_applegooglesteamplaystationxboxnetflixspotify_prepaid_card">6.9. Apple/Google/Steam/PlayStation/Xbox/Netflix/Spotify prepaid card</h3>
+<div class="sect3">
+<h4 id="_payment_format_2">6.9.1. Payment format</h4>
+<div class="paragraph">
+<p>Buy prepaid card for Google/Apple/Steam/etc</p>
+</div>
+<div class="paragraph">
+<p>Note: The "amount" field must be calculated manually (as denomination.price). If the price changes, the payment will be declined.</p>
+</div>
+<div class="sect4">
+<h5 id="_required_fields_35">Required Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of product for card (see "Products dictionary" for details)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>denominationId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of product for card (see "Denominations dictionary" for details)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be "BUY_ITEM"</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_example_payload_30">Example Payload</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "productId": 14,
+  "denominationId": 59,
+  "type": "BUY_ITEM"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dictionary_products">6.9.2. Dictionary "Products"</h4>
+<div class="paragraph">
+<p><strong>Endpoint:</strong> <code>GET /v1/prepaid2/products</code></p>
+</div>
+<div class="paragraph">
+<p>Retrieves the products dictionary.</p>
+</div>
+<div class="sect4">
+<h5 id="_response_19">Response</h5>
+<div class="paragraph">
+<p>API returns list of services for topup.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+   {
+      "category" : "Gift Card, PlayStation",
+      "description" : "PlayStation Store Wallet gift cards are ...(cut)",
+      "id" : 98,
+      "instruction" : "1. Log in to your PlayStation Network account ...(cut)",
+      "name" : "PlayStation Store Wallet United Kingdom"
+   },
+   ...
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_fields_12">Response Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description of product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category of product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>instruction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instruction for your prepaid card</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dictionary_denominations">6.9.3. Dictionary "Denominations"</h4>
+<div class="paragraph">
+<p><strong>Endpoint:</strong> <code>GET /v1/prepaid2/denominations?productid=id</code></p>
+</div>
+<div class="paragraph">
+<p>Retrieves the denominations dictionary for given product.</p>
+</div>
+<div class="sect4">
+<h5 id="_request_fields_6">Request Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product Id to list denominations for.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_response_20">Response</h5>
+<div class="paragraph">
+<p>API returns list of denominations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+   {
+      "id" : 527,
+      "name" : "10 GPB",
+      "price" : 13.45,
+      "stock" : 5,
+      "value" : "10 GPB"
+   },
+   ...
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_fields_13">Response Fields</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id of denomination</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of denomination</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>price</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Price of denomination in USD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stock</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Amount of denomination in stock</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value of denomination</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_capitalist">6.10. CAPITALIST</h3>
+<div class="sect3">
+<h4 id="_capitalist_internal_payments">6.10.1. CAPITALIST INTERNAL PAYMENTS</h4>
 <div class="paragraph">
 <p>Send payment to another system user.</p>
 </div>
 <div class="sect4">
-<h5 id="_required_fields_35">Required Fields</h5>
+<h5 id="_required_fields_36">Required Fields</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -4579,7 +4999,7 @@ Not all payment channels listed in the documentation may be currently available.
 </table>
 </div>
 <div class="sect4">
-<h5 id="_example_payload_30">Example Payload</h5>
+<h5 id="_example_payload_31">Example Payload</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
@@ -4675,7 +5095,7 @@ Not all payment channels listed in the documentation may be currently available.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">USDTb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">USDT (Bep 20)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USDT (Bep 20 - Binance Smart Chain)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ETH</p></td>
@@ -4687,7 +5107,7 @@ Not all payment channels listed in the documentation may be currently available.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">USDCb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">USDC (Bep 20)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USDC (Bep 20 - Binance Smart Chain)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BTC</p></td>
@@ -4779,7 +5199,7 @@ Not all payment channels listed in the documentation may be currently available.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-02 12:39:13 UTC
+Last updated 2026-07-02 13:08:04 UTC
 </div>
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
