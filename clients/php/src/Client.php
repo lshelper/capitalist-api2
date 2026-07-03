@@ -86,6 +86,26 @@ final class Client
         return $this->request('GET', '/v1/depositAddressAutoUSDTt/' . rawurlencode($account));
     }
 
+    public function getPrepaidServices()
+    {
+        return $this->request('GET', '/v1/prepaid2/services');
+    }
+
+    public function getPrepaidRegions()
+    {
+        return $this->request('GET', '/v1/prepaid2/regions');
+    }
+
+    public function getPrepaidProducts()
+    {
+        return $this->request('GET', '/v1/prepaid2/products');
+    }
+
+    public function getPrepaidDenominations($productId)
+    {
+        return $this->request('GET', '/v1/prepaid2/denominations', null, array('productid' => $productId));
+    }
+
     public function startKyc(array $request)
     {
         return $this->request('POST', '/v1/kyc/start', $request);

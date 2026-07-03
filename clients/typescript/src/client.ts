@@ -13,7 +13,11 @@ import type {
   PaymentCreateResponse,
   PaymentRequest,
   PaymentStatus,
+  PrepaidDenomination,
+  PrepaidProduct,
+  PrepaidService,
   TransactionsFilters,
+  TransactionsResponse,
 } from './types.js';
 
 const DEFAULT_BASE_URL = 'https://api2.capitalist.net';
@@ -71,7 +75,7 @@ export class CapitalistApi2Client {
     return this.request('GET', '/v1/orders', undefined, asQuery(filters));
   }
 
-  getTransactions(filters: TransactionsFilters = {}): Promise<unknown> {
+  getTransactions(filters: TransactionsFilters = {}): Promise<TransactionsResponse> {
     return this.request('GET', '/v1/transactions', undefined, asQuery(filters));
   }
 
@@ -81,6 +85,22 @@ export class CapitalistApi2Client {
 
   getAutoConvertedUSDTtDepositAddress(account: string): Promise<DepositAddressResponse> {
     return this.request('GET', `/v1/depositAddressAutoUSDTt/${encodeURIComponent(account)}`);
+  }
+
+  getPrepaidServices(): Promise<PrepaidService[]> {
+    return this.request('GET', '/v1/prepaid2/services');
+  }
+
+  getPrepaidRegions(): Promise<string[]> {
+    return this.request('GET', '/v1/prepaid2/regions');
+  }
+
+  getPrepaidProducts(): Promise<PrepaidProduct[]> {
+    return this.request('GET', '/v1/prepaid2/products');
+  }
+
+  getPrepaidDenominations(productId: number | string): Promise<PrepaidDenomination[]> {
+    return this.request('GET', '/v1/prepaid2/denominations', undefined, { productid: productId });
   }
 
   startKyc(request: KycStartRequest): Promise<KycStartResponse> {

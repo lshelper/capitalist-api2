@@ -112,8 +112,8 @@ func (c *Client) GetOrders(ctx context.Context, filters OrdersFilters) (any, err
 	return result, err
 }
 
-func (c *Client) GetTransactions(ctx context.Context, filters TransactionsFilters) (any, error) {
-	var result any
+func (c *Client) GetTransactions(ctx context.Context, filters TransactionsFilters) (TransactionsResponse, error) {
+	var result TransactionsResponse
 	err := c.requestJSON(ctx, http.MethodGet, "/v1/transactions", nil, queryFromStruct(filters), &result)
 	return result, err
 }
@@ -127,6 +127,37 @@ func (c *Client) GetDepositAddress(ctx context.Context, currency Currency) (Depo
 func (c *Client) GetAutoConvertedUSDTtDepositAddress(ctx context.Context, account string) (DepositAddressResponse, error) {
 	var result DepositAddressResponse
 	err := c.requestJSON(ctx, http.MethodGet, "/v1/depositAddressAutoUSDTt/"+url.PathEscape(account), nil, nil, &result)
+	return result, err
+}
+
+func (c *Client) GetPrepaidServices(ctx context.Context) ([]PrepaidService, error) {
+	var result []PrepaidService
+	err := c.requestJSON(ctx, http.MethodGet, "/v1/prepaid2/services", nil, nil, &result)
+	return result, err
+}
+
+func (c *Client) GetPrepaidRegions(ctx context.Context) ([]string, error) {
+	var result []string
+	err := c.requestJSON(ctx, http.MethodGet, "/v1/prepaid2/regions", nil, nil, &result)
+	return result, err
+}
+
+func (c *Client) GetPrepaidProducts(ctx context.Context) ([]PrepaidProduct, error) {
+	var result []PrepaidProduct
+	err := c.requestJSON(ctx, http.MethodGet, "/v1/prepaid2/products", nil, nil, &result)
+	return result, err
+}
+
+func (c *Client) GetPrepaidDenominations(ctx context.Context, productID any) ([]PrepaidDenomination, error) {
+	var result []PrepaidDenomination
+	err := c.requestJSON(
+		ctx,
+		http.MethodGet,
+		"/v1/prepaid2/denominations",
+		nil,
+		url.Values{"productid": {fmt.Sprint(productID)}},
+		&result,
+	)
 	return result, err
 }
 

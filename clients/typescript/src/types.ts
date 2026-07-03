@@ -61,6 +61,8 @@ export interface PaymentStatus {
   payload: string;
   userRequestId: string;
   callbackUrl?: string | null;
+  txId?: string;
+  dstAddress?: string;
 }
 
 export interface PaymentCallback {
@@ -92,6 +94,51 @@ export interface OrdersFilters extends ListFilters {
 
 export interface TransactionsFilters extends ListFilters {
   transactionId?: number;
+}
+
+export interface Transaction {
+  transactionId: number;
+  createDate: string;
+  executeDate?: string;
+  type: string;
+  state: string;
+  amount: number;
+  currency: Currency;
+  planDate?: string;
+  version: number;
+  txId?: string;
+  dstAddress?: string;
+}
+
+export interface TransactionsResponse {
+  transactions: Transaction[];
+  count: number;
+}
+
+export interface PrepaidService {
+  description: string;
+  hasRegion: boolean;
+  id: number;
+  name: string;
+  type: string;
+  unfixedCurrency?: Currency;
+  unfixedRate?: number | string;
+}
+
+export interface PrepaidProduct {
+  category: string;
+  description: string;
+  id: number;
+  instruction: string;
+  name: string;
+}
+
+export interface PrepaidDenomination {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  value: string;
 }
 
 export interface KycStartRequest {

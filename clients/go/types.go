@@ -58,6 +58,8 @@ type PaymentStatus struct {
 	Payload       string   `json:"payload"`
 	UserRequestID string   `json:"userRequestId"`
 	CallbackURL   *string  `json:"callbackUrl,omitempty"`
+	TxID          *string  `json:"txId,omitempty"`
+	DstAddress    *string  `json:"dstAddress,omitempty"`
 }
 
 type PaymentCallback struct {
@@ -91,6 +93,51 @@ type OrdersFilters struct {
 type TransactionsFilters struct {
 	ListFilters
 	TransactionID int64 `url:"transactionId"`
+}
+
+type Transaction struct {
+	TransactionID int64    `json:"transactionId"`
+	CreateDate    string   `json:"createDate"`
+	ExecuteDate   string   `json:"executeDate,omitempty"`
+	Type          string   `json:"type"`
+	State         string   `json:"state"`
+	Amount        float64  `json:"amount"`
+	Currency      Currency `json:"currency"`
+	PlanDate      string   `json:"planDate,omitempty"`
+	Version       int64    `json:"version"`
+	TxID          *string  `json:"txId,omitempty"`
+	DstAddress    *string  `json:"dstAddress,omitempty"`
+}
+
+type TransactionsResponse struct {
+	Transactions []Transaction `json:"transactions"`
+	Count        int64         `json:"count"`
+}
+
+type PrepaidService struct {
+	Description     string   `json:"description"`
+	HasRegion       bool     `json:"hasRegion"`
+	ID              int64    `json:"id"`
+	Name            string   `json:"name"`
+	Type            string   `json:"type"`
+	UnfixedCurrency Currency `json:"unfixedCurrency,omitempty"`
+	UnfixedRate     any      `json:"unfixedRate,omitempty"`
+}
+
+type PrepaidProduct struct {
+	Category    string `json:"category"`
+	Description string `json:"description"`
+	ID          int64  `json:"id"`
+	Instruction string `json:"instruction"`
+	Name        string `json:"name"`
+}
+
+type PrepaidDenomination struct {
+	ID    int64   `json:"id"`
+	Name  string  `json:"name"`
+	Price float64 `json:"price"`
+	Stock int64   `json:"stock"`
+	Value string  `json:"value"`
 }
 
 type KYCStartRequest struct {
