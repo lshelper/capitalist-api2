@@ -12,6 +12,7 @@ source ./src/capitalist-api2.sh
 
 capitalist_api2_list_accounts "USD"
 capitalist_api2_get_deposit_address "USDTb"
+capitalist_api2_get_prepaid_services
 ```
 
 The client requires `curl` and either `openssl` or `shasum`.
@@ -42,6 +43,8 @@ Arguments are optional and default to:
 - `currency`: `CAPITALIST_API2_CURRENCY` or `USD`
 - `payloadAccount`: channel-specific account only when the sample needs it
 
+The prepaid helpers accept extra payload-specific arguments. Use the `capitalist_api2_get_prepaid_*` dictionary helpers to calculate `TOPUP_SERVICE` and `BUY_ITEM` amounts before creating real payments.
+
 Example:
 
 ```bash
@@ -60,6 +63,7 @@ capitalist_api2_create_payment_capitalist
 - `src/merchant/` for merchant orders.
 - `src/payments/create.sh` and `src/payments/create/` for payment creation.
 - `src/payments/status.sh` for payment status lookup.
+- `src/prepaid2/` for topup service and prepaid card dictionaries.
 - `src/settings/` for IP whitelist management.
 - `src/wallets/` for cryptocurrency deposit addresses.
 

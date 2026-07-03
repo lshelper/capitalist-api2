@@ -34,6 +34,7 @@ The collection is split by operation area:
 - `merchant/*.http` for merchant orders.
 - `payments/create/*.http` for payment creation by channel.
 - `payments/status/*.http` for payment status lookup.
+- `prepaid2/*.http` for topup service and prepaid card dictionaries.
 - `settings/*.http` for security settings exposed by the API, such as IP whitelist management.
 - `wallets/*.http` for cryptocurrency deposit addresses.
 

@@ -1,4 +1,4 @@
-### UKR_MOBILE payment
+### BUY_ITEM payment
 < {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
 POST {{baseUrl}}/v1/payment
 API-Key: {{apiKey}}
@@ -7,13 +7,14 @@ Signature: {{signature}}
 Content-Type: application/json
 
 {
-  "userRequestId": "ukr-mobile-{{$timestamp}}",
+  "userRequestId": "buy-item-{{$timestamp}}",
   "accountFrom": "{{fromAccount}}",
-  "amount": 100,
+  "amount": 13.45,
   "currency": "{{currency}}",
-  "comment": "UKR_MOBILE payout example",
+  "comment": "BUY_ITEM payment example",
   "payload": {
-    "type": "UKR_MOBILE",
-    "account": "380501234567"
+    "productId": {{prepaidProductId}},
+    "denominationId": {{prepaidDenominationId}},
+    "type": "BUY_ITEM"
   }
 }

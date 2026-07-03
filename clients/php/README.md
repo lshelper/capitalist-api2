@@ -12,6 +12,7 @@ use Capitalist\Api2\Client;
 $client = new Client(getenv('CAPITALIST_API2_KEY'), getenv('CAPITALIST_API2_SECRET'));
 $accounts = $client->listAccounts('USD');
 $depositAddress = $client->getDepositAddress('USDTb');
+$prepaidServices = $client->getPrepaidServices();
 ```
 
 ## Callback verification

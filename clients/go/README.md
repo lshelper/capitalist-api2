@@ -33,6 +33,13 @@ func main() {
 	}
 
 	fmt.Println(address.Address)
+
+	services, err := client.GetPrepaidServices(context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(services)
 }
 ```
 
