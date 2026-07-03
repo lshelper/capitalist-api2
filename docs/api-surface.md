@@ -48,6 +48,10 @@ Note: the official HTML page obfuscates the email inside the sample JSON. Becaus
 | Get transactions | GET | `/v1/transactions` |
 | Get cryptocurrency deposit address | GET | `/v1/depositAddress/{currency}` |
 | Get USDT TRC-20 autoconversion deposit address | GET | `/v1/depositAddressAutoUSDTt/{account}` |
+| List prepaid topup services | GET | `/v1/prepaid2/services` |
+| List prepaid topup regions | GET | `/v1/prepaid2/regions` |
+| List prepaid card products | GET | `/v1/prepaid2/products` |
+| List prepaid card denominations | GET | `/v1/prepaid2/denominations?productid={productId}` |
 | Start KYC | POST | `/v1/kyc/start` |
 | Get KYC status | GET | `/v1/kyc/status/{kycExternalUserId}/{sort}` |
 | Get KYC status by UUID | GET | `/v1/kyc/statusByUuid/{uuid}` |
@@ -68,8 +72,8 @@ Supported deposit address currency codes:
 - `USDT` - ERC-20
 - `USDC` - ERC-20
 - `USDTt` - TRC-20
-- `USDTb` - BEP-20 / BSC
-- `USDCb` - BEP-20 / BSC
+- `USDTb` - BEP-20 / Binance Smart Chain
+- `USDCb` - BEP-20 / Binance Smart Chain
 
 Response body:
 
@@ -117,6 +121,15 @@ Callback body fields:
 | `userRequestId` | string | Yes | Unique request identifier supplied when creating the payment. |
 | `callbackUrl` | string | Yes | Callback URL used for notifications. |
 
+Payment status responses for cryptocurrency transfers may include extra fields:
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `txId` | string | Transaction ID for crypto transfers. |
+| `dstAddress` | string | Destination address for incoming crypto transfers. |
+
+Transaction history items may include the same `txId` and `dstAddress` crypto fields.
+
 ## Payment channels
 
 The API accepts payment-specific data in the `payload` object. This repository keeps examples for the documented channel types in Bash and IntelliJ HTTP Client form.
@@ -130,6 +143,20 @@ Cryptocurrency channel types documented upstream:
 - `USDTTRC20`
 - `USDCBSC`
 - `USDTBSC`
+
+Prepaid payment payload types documented upstream:
+
+- `TOPUP_SERVICE` - Steam account topups. The request `amount` must be calculated as `quantity * unfixedRate`; if the rate or price changes before execution, the payment can be declined.
+- `BUY_ITEM` - Apple/Google/Steam/PlayStation/Xbox/Netflix/Spotify prepaid cards. The request `amount` must match the denomination `price`; if the price changes before execution, the payment can be declined.
+
+Prepaid dictionaries:
+
+- `GET /v1/prepaid2/services` returns topup services. Only services with `type` equal to `unfixed` are valid for `TOPUP_SERVICE`.
+- `GET /v1/prepaid2/regions` returns valid topup regions for services that require a region.
+- `GET /v1/prepaid2/products` returns prepaid card products.
+- `GET /v1/prepaid2/denominations?productid={productId}` returns card denominations for a product.
+
+The official documentation no longer lists the `UKR_MOBILE` payment channel.
 
 ## Rate limiting
 
