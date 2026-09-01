@@ -29,3 +29,7 @@ Compared with the 2026-06-10 snapshot, the current official documentation adds o
 - Expanded `USDTb` and `USDCb` descriptions to explicitly name BEP-20 as Binance Smart Chain.
 - Removed the `UKR_MOBILE` Ukrainian mobile payment channel from the documented payment channels.
 - Updated the transactions example to use transaction type `OUT` and include a crypto `txId`.
+
+# Upstream changes observed on 2026-09-01
+
+Compared with the 2026-07-03 snapshot, the official page changes only its generated `Last updated` timestamp from 2026-07-02 13:08:04 UTC to 2026-07-16 14:27:48 UTC. No endpoint, request or response field, authentication or signature rule, callback, currency, payment channel, limit, warning, or example content changed. The maintained clients, examples, and shared API surface remain current without code changes.

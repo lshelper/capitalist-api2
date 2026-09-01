@@ -3984,7 +3984,7 @@ For technical support and questions about the API integration, please contact su
 
 <div id="footer-text">
 
-Last updated 2026-07-02 13:08:04 UTC
+Last updated 2026-07-16 14:27:48 UTC
 
 </div>
 
