@@ -1,0 +1,32 @@
+### Removed payment channels
+#
+# This file is documentation only. It intentionally contains no executable HTTP
+# requests so removed payment channels cannot be sent accidentally.
+#
+# GECARD and TRCARD stopped working in Capitalist and their active request
+# examples were removed on 2026-09-01. Keep the former payload shapes here in
+# case the channels are reintroduced or their removal history needs review.
+# Before restoring either example, verify the current official API documentation
+# and confirm that the channel is operational in Capitalist.
+
+### GECARD — removed Georgian card channel
+# Former payload shape:
+# {
+#   "type": "GECARD",
+#   "account": "<card number>",
+#   "senderFirstname": "<sender first name>",
+#   "senderLastname": "<sender last name>",
+#   "senderIdentityNumber": "<sender identity number>",
+#   "receiverFirstname": "<receiver first name>",
+#   "receiverLastname": "<receiver last name>"
+# }
+
+### TRCARD — removed Turkish card channel
+# Former payload shape:
+# {
+#   "type": "TRCARD",
+#   "account": "<card number>",
+#   "senderFullname": "<sender full name>",
+#   "senderIdentityNumber": "<sender identity number>",
+#   "beneficiaryFullname": "<beneficiary full name>"
+# }

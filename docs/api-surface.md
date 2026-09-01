@@ -158,6 +158,8 @@ Prepaid dictionaries:
 
 The official documentation no longer lists the `UKR_MOBILE` payment channel.
 
+`GECARD` and `TRCARD` no longer work in Capitalist. Their specialized Bash helpers and executable IntelliJ HTTP Client examples were removed on 2026-09-01, even though the current upstream documentation snapshot may still list these channels. Their former payload shapes are retained as non-executable documentation in `clients/http/payments/removed-channels.http`.
+
 ## Rate limiting
 
 The upstream documentation recommends using callbacks instead of polling payment status more than 20 times per minute. Excessively frequent API calls may be throttled.
