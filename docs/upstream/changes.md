@@ -33,3 +33,13 @@ Compared with the 2026-06-10 snapshot, the current official documentation adds o
 # Upstream changes observed on 2026-09-01
 
 Compared with the 2026-07-03 snapshot, the official page changes only its generated `Last updated` timestamp from 2026-07-02 13:08:04 UTC to 2026-07-16 14:27:48 UTC. No endpoint, request or response field, authentication or signature rule, callback, currency, payment channel, limit, warning, or example content changed. The maintained clients, examples, and shared API surface remain current without code changes.
+
+# Upstream changes observed on 2026-10-01
+
+Compared with the 2026-09-01 snapshot (upstream timestamp now 2026-09-30 10:12:32 UTC):
+
+- Transaction history filter `transactionId` changes from number to string.
+- Transaction response replaces the old identifier/date/version fields with `userRequestId`, `docType`, `fee`, `san`, `documentId`, and nullable `comment`; the example also includes `dstAddress`.
+- IMPS replaces flat snake_case fields with a nested `destination`, adds `bankName` and example `recipient.phone`, and corrects IFSC format.
+- No endpoint, signature, callback, currency, or rate-limit changes were found.
+- `inr_sum` remains undocumented; recipient requiredness and `san` semantics remain unspecified.

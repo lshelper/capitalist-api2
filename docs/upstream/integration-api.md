@@ -1040,7 +1040,7 @@ Retrieves a list of transactions using filters.
 | `offset` | number | No | Number of transactions to skip. Default value is 0. |
 | `periodStart` | string | No | Start date of the period in ISO 8601 format. |
 | `periodEnd` | string | No | End date of the period in ISO 8601 format. |
-| `transactionId` | number | No | Unique identifier of the transaction. |
+| `transactionId` | string | No | Unique identifier of the transaction. |
 
 </div>
 
@@ -1062,16 +1062,19 @@ Returns an array of transactions.
 {
     "transactions": [
         {
-            "transactionId": 8367664,
+            "userRequestId": "9876543219",
             "createDate": "2014-02-18T21:47:29.452Z",
-            "executeDate": "2014-02-18T21:47:39.543Z",
-            "type": "OUT",
+            "docType": "OUT",
+            "type": "PAYONEER",
             "state": "EXECUTED",
+            "fee": 50.00000000,
             "amount": 500.00000000,
             "currency": "USD",
-            "planDate": "2014-02-18T21:21:53.314Z",
-            "version": 1,
-            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201"
+            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201",
+            "dstAddress": "14CoNVrdfzNwSK4Eb3WvCZevv55Bsr98xr",
+            "san": "d00f07c120241230210508",
+            "documentId": 123,
+            "comment": "Own funds"
         }
     ],
     "count": 123
@@ -1101,17 +1104,19 @@ Returns an array of transactions.
 
 | Field | Type | Description |
 |----|----|----|
-| `transactionId` | number | Unique identifier of the transaction. |
+| `userRequestId` | string | Unique identifier of the transaction. |
 | `createDate` | string | Date of creation in ISO 8601 format. |
-| `executeDate` | string | Date of execution in ISO 8601 format. |
+| `docType` | string | Document type |
 | `type` | string | Transaction type |
 | `state` | string | Transaction state |
+| `fee` | number | Transaction fee |
 | `amount` | number | Transaction amount |
 | `currency` | string | Currency code |
-| `planDate` | string | Date of plan in ISO 8601 format. |
-| `version` | number | Transaction version |
 | `txId` | string | Transaction ID for crypto transfers |
 | `dstAddress` | string | Destination address for incoming crypto transfers (the receiver address, your one) |
+| `san` | string |  |
+| `documentId` | integer | Unique document identifier |
+| `comment` | string | Transaction comment (may be null) |
 
 </div>
 
@@ -2615,12 +2620,13 @@ India’s real-time interbank electronic funds transfer system.
 
 ##### Required Fields
 
-| Field          | Type   | Description                                      |
-|----------------|--------|--------------------------------------------------|
-| `type`         | string | Must be "IMPS"                                   |
-| `account`      | string | Account number (digits only)                     |
-| `account_name` | string | Beneficiary account name                         |
-| `bank_code`    | string | Indian Financial System Code (IFSC, digits only) |
+| Field | Type | Description |
+|----|----|----|
+| `type` | string | Must be "IMPS" |
+| `accountNumber` | string | Account number (digits only) |
+| `accountName` | string | Beneficiary account name |
+| `bankCode` | string | Indian Financial System Code (IFSC): exactly 11 characters - 4 uppercase letters, `0`, then 6 uppercase letters or digits |
+| `bankName` | string | Name of a bank |
 
 </div>
 
@@ -2635,9 +2641,15 @@ India’s real-time interbank electronic funds transfer system.
 ``` highlightjs
 {
   "type": "IMPS",
-  "account": "1234567890",
-  "account_name": "Raj Kumar",
-  "bank_code": "SBIN0001234"
+  "destination": {
+    "bankCode": "SBIN0001234",
+    "accountName": "Raj Kumar",
+    "accountNumber": "0123456789012345",
+    "bankName": "Punjab National Bank"
+  },
+  "recipient": {
+    "phone": "12125551234"
+  }
 }
 ```
 
@@ -3984,7 +3996,7 @@ For technical support and questions about the API integration, please contact su
 
 <div id="footer-text">
 
-Last updated 2026-07-16 14:27:48 UTC
+Last updated 2026-09-30 10:12:32 UTC
 
 </div>
 

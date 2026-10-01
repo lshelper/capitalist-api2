@@ -1691,7 +1691,7 @@ The response also includes all payment fields as originally submitted, as well a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>transactionId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier of the transaction.</p></td>
 </tr>
@@ -1708,16 +1708,19 @@ The response also includes all payment fields as originally submitted, as well a
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "transactions": [
         {
-            "transactionId": 8367664,
+            "userRequestId": "9876543219",
             "createDate": "2014-02-18T21:47:29.452Z",
-            "executeDate": "2014-02-18T21:47:39.543Z",
-            "type": "OUT",
+            "docType": "OUT",
+            "type": "PAYONEER",
             "state": "EXECUTED",
+            "fee": 50.00000000,
             "amount": 500.00000000,
             "currency": "USD",
-            "planDate": "2014-02-18T21:21:53.314Z",
-            "version": 1,
-            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201"
+            "txId": "652786b90e4538e1e7bf942a603fd5bb452ef84e18c98dac62d8ce5c64409201",
+            "dstAddress": "14CoNVrdfzNwSK4Eb3WvCZevv55Bsr98xr",
+            "san": "d00f07c120241230210508",
+            "documentId": 123,
+            "comment": "Own funds"
         }
     ],
     "count": 123
@@ -1771,8 +1774,8 @@ The response also includes all payment fields as originally submitted, as well a
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transactionId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>userRequestId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier of the transaction.</p></td>
 </tr>
 <tr>
@@ -1781,9 +1784,9 @@ The response also includes all payment fields as originally submitted, as well a
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date of creation in ISO 8601 format.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>executeDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date of execution in ISO 8601 format.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Document type</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
@@ -1796,6 +1799,11 @@ The response also includes all payment fields as originally submitted, as well a
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transaction state</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fee</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transaction fee</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>amount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transaction amount</p></td>
@@ -1806,16 +1814,6 @@ The response also includes all payment fields as originally submitted, as well a
 <td class="tableblock halign-left valign-top"><p class="tableblock">Currency code</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>planDate</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date of plan in ISO 8601 format.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transaction version</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>txId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transaction ID for crypto transfers</p></td>
@@ -1824,6 +1822,21 @@ The response also includes all payment fields as originally submitted, as well a
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dstAddress</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Destination address for incoming crypto transfers (the receiver address, your one)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>san</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>documentId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique document identifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>comment</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transaction comment (may be null)</p></td>
 </tr>
 </tbody>
 </table>
@@ -3631,19 +3644,24 @@ Not all payment channels listed in the documentation may be currently available.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Must be "IMPS"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>account</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>accountNumber</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Account number (digits only)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>account_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>accountName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Beneficiary account name</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bank_code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bankCode</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indian Financial System Code (IFSC, digits only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indian Financial System Code (IFSC): exactly 11 characters - 4 uppercase letters, <code>0</code>, then 6 uppercase letters or digits</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bankName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of a bank</p></td>
 </tr>
 </tbody>
 </table>
@@ -3654,9 +3672,15 @@ Not all payment channels listed in the documentation may be currently available.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
   "type": "IMPS",
-  "account": "1234567890",
-  "account_name": "Raj Kumar",
-  "bank_code": "SBIN0001234"
+  "destination": {
+    "bankCode": "SBIN0001234",
+    "accountName": "Raj Kumar",
+    "accountNumber": "0123456789012345",
+    "bankName": "Punjab National Bank"
+  },
+  "recipient": {
+    "phone": "12125551234"
+  }
 }</code></pre>
 </div>
 </div>
@@ -5199,7 +5223,7 @@ Not all payment channels listed in the documentation may be currently available.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-07-16 14:27:48 UTC
+Last updated 2026-09-30 10:12:32 UTC
 </div>
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
