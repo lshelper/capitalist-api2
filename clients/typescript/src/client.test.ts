@@ -164,15 +164,17 @@ test('parses crypto metadata fields on transactions', async () => {
         JSON.stringify({
           transactions: [
             {
-              transactionId: 8367664,
+              userRequestId: '9876543219',
               createDate: '2014-02-18T21:47:29.452Z',
-              executeDate: '2014-02-18T21:47:39.543Z',
-              type: 'OUT',
+              docType: 'OUT',
+              type: 'PAYONEER',
+              fee: 50,
+              san: 'example-san',
+              documentId: 123,
+              comment: null,
               state: 'EXECUTED',
               amount: 500,
               currency: 'USD',
-              planDate: '2014-02-18T21:21:53.314Z',
-              version: 1,
               txId: 'tx-hash',
               dstAddress: 'wallet-address',
             },
@@ -186,4 +188,22 @@ test('parses crypto metadata fields on transactions', async () => {
 
   assert.equal(result.transactions[0]?.txId, 'tx-hash');
   assert.equal(result.transactions[0]?.dstAddress, 'wallet-address');
+});
+
+test('transaction history preserves string IDs and the current response fields', async () => {
+  const item = {
+    userRequestId: '9876543219', createDate: '2026-10-01T00:00:00Z',
+    docType: 'OUT', type: 'IMPS', state: 'EXECUTED', fee: 1,
+    amount: 100, currency: 'USD', san: 'example-san', documentId: 123,
+    comment: null, txId: 'example-tx', dstAddress: 'example-address',
+  };
+  const client = new CapitalistApi2Client({
+    apiKey: 'key', apiSecret: 'secret', baseUrl: 'https://example.test',
+    fetchImpl: async (input) => {
+      assert.equal(new URL(String(input)).searchParams.get('transactionId'), '0009007199254740993');
+      return new Response(JSON.stringify({ transactions: [item], count: 1 }));
+    },
+  });
+  const response = await client.getTransactions({ transactionId: '0009007199254740993' });
+  assert.deepEqual(response.transactions[0], item);
 });

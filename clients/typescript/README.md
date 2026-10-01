@@ -31,3 +31,25 @@ const valid = verifySignature(timestampHeader, rawBody, apiSecret, signatureHead
 npm install
 npm test
 ```
+
+## API documentation sync: 2026-10-01
+
+See `../../docs/api-surface.md` for the updated transaction history contract, nested IMPS payload, and unresolved `inr_sum`/recipient requirements.
+
+## Synthetic IMPS example
+
+Build the client, then run the offline mock (no network or credentials required):
+
+```bash
+npm run build
+node examples/imps-synthetic.mjs
+```
+
+The example uses a fixed amount of 100 USD and synthetic recipient details from the public documentation. To send one request manually, first configure these environment variables outside the repository:
+
+- `CAPITALIST_API2_BASE_URL`: explicitly selected HTTPS API origin, without `/v1`.
+- `CAPITALIST_API2_KEY` and `CAPITALIST_API2_SECRET`: credentials.
+- `CAPITALIST_API2_FROM_ACCOUNT`: verified USD source account.
+- `CAPITALIST_API2_USER_REQUEST_ID`: unique identifier for this operation.
+
+Then run `node examples/imps-synthetic.mjs --send`. This submits a payment to the configured environment; synthetic details alone do not establish a provider sandbox. The script sends once, logs only submission status/document ID, and never retries. After a timeout or error, reconcile by the supplied request ID before another submission. API keys, server addresses and source account data are not saved by this script.

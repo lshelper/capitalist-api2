@@ -49,3 +49,7 @@ Signature = sha256(X-Request-Timestamp + raw request body + API-secret)
 For `GET` requests, the body is an empty string.
 
 The binary KYC picture upload endpoint is not included yet, because the signature must be calculated from the exact JPEG bytes. The JetBrains helper currently signs text request bodies.
+
+## API documentation sync: 2026-10-01
+
+See `../../docs/api-surface.md` for the updated transaction history contract, nested IMPS payload, and unresolved `inr_sum`/recipient requirements.

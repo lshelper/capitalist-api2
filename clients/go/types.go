@@ -92,19 +92,21 @@ type OrdersFilters struct {
 
 type TransactionsFilters struct {
 	ListFilters
-	TransactionID int64 `url:"transactionId"`
+	TransactionID string `url:"transactionId"`
 }
 
 type Transaction struct {
-	TransactionID int64    `json:"transactionId"`
+	UserRequestID string   `json:"userRequestId"`
 	CreateDate    string   `json:"createDate"`
-	ExecuteDate   string   `json:"executeDate,omitempty"`
+	DocType       string   `json:"docType"`
+	Fee           float64  `json:"fee"`
+	SAN           string   `json:"san"`
+	DocumentID    int64    `json:"documentId"`
+	Comment       *string  `json:"comment,omitempty"`
 	Type          string   `json:"type"`
 	State         string   `json:"state"`
 	Amount        float64  `json:"amount"`
 	Currency      Currency `json:"currency"`
-	PlanDate      string   `json:"planDate,omitempty"`
-	Version       int64    `json:"version"`
 	TxID          *string  `json:"txId,omitempty"`
 	DstAddress    *string  `json:"dstAddress,omitempty"`
 }

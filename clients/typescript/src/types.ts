@@ -93,19 +93,21 @@ export interface OrdersFilters extends ListFilters {
 }
 
 export interface TransactionsFilters extends ListFilters {
-  transactionId?: number;
+  transactionId?: string;
 }
 
 export interface Transaction {
-  transactionId: number;
+  userRequestId: string;
   createDate: string;
-  executeDate?: string;
+  docType: string;
+  fee: number;
+  san: string;
+  documentId: number;
+  comment?: string | null;
   type: string;
   state: string;
   amount: number;
   currency: Currency;
-  planDate?: string;
-  version: number;
   txId?: string;
   dstAddress?: string;
 }

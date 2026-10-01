@@ -198,7 +198,7 @@ func TestGetPaymentByDocumentIDParsesCryptoMetadata(t *testing.T) {
 func TestGetTransactionsParsesCryptoMetadata(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(`{"transactions":[{"transactionId":8367664,"createDate":"2014-02-18T21:47:29.452Z","executeDate":"2014-02-18T21:47:39.543Z","type":"OUT","state":"EXECUTED","amount":500,"currency":"USD","planDate":"2014-02-18T21:21:53.314Z","version":1,"txId":"tx-hash","dstAddress":"wallet-address"}],"count":1}`))
+		_, _ = w.Write([]byte(`{"transactions":[{"userRequestId":"9876543219","createDate":"2014-02-18T21:47:29.452Z","docType":"OUT","type":"PAYONEER","fee":50,"san":"example-san","documentId":123,"comment":null,"state":"EXECUTED","amount":500,"currency":"USD","txId":"tx-hash","dstAddress":"wallet-address"}],"count":1}`))
 	}))
 	defer server.Close()
 
@@ -213,5 +213,27 @@ func TestGetTransactionsParsesCryptoMetadata(t *testing.T) {
 	}
 	if result.Transactions[0].DstAddress == nil || *result.Transactions[0].DstAddress != "wallet-address" {
 		t.Fatalf("dstAddress = %#v, want wallet-address", result.Transactions[0].DstAddress)
+	}
+}
+
+func TestGetTransactionsCurrentContract(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/v1/transactions" || r.URL.Query().Get("transactionId") != "0009007199254740993" {
+			t.Errorf("unexpected history URL: %s", r.URL.String())
+		}
+		_, _ = w.Write([]byte(`{"transactions":[{"userRequestId":"9876543219","createDate":"2026-10-01T00:00:00Z","docType":"OUT","type":"IMPS","state":"EXECUTED","fee":1,"amount":100,"currency":"USD","san":"example-san","documentId":123,"comment":null,"txId":"example-tx","dstAddress":"example-address"}],"count":1}`))
+	}))
+	defer server.Close()
+	client := NewClient("key", "secret", WithBaseURL(server.URL))
+	result, err := client.GetTransactions(context.Background(), TransactionsFilters{TransactionID: "0009007199254740993"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(result.Transactions) != 1 || result.Count != 1 {
+		t.Fatalf("unexpected response: %+v", result)
+	}
+	item := result.Transactions[0]
+	if item.UserRequestID != "9876543219" || item.DocType != "OUT" || item.Type != "IMPS" || item.Fee != 1 || item.SAN != "example-san" || item.DocumentID != 123 || item.Comment != nil || item.TxID == nil || *item.TxID != "example-tx" || item.DstAddress == nil || *item.DstAddress != "example-address" {
+		t.Fatalf("unexpected transaction: %+v", item)
 	}
 }

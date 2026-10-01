@@ -182,3 +182,13 @@ The upstream documentation recommends using callbacks instead of polling payment
 | PHP 7.x | `clients/php` | PSR-4 package using `ext-curl`. |
 | Go | `clients/go` | Go client using only the standard library. |
 | TypeScript/Node.js | `clients/typescript` | Strict TypeScript client using `fetch`. |
+
+## Synchronization on 2026-10-01
+
+Transaction history now documents `transactionId` as a string query parameter. Response items contain `userRequestId`, `createDate`, `docType`, `type`, `state`, `fee`, `amount`, `currency`, `txId`, `dstAddress`, `san`, `documentId`, and nullable `comment`. The old `transactionId`, `executeDate`, `planDate`, and `version` response fields are no longer documented. `docType` is the document direction/type; `type` is the payment channel. The meaning of `san` is not specified upstream.
+
+IMPS payloads now use `destination` with `bankCode`, `accountName`, `accountNumber`, and `bankName`, and the published example includes `recipient.phone`. IFSC is exactly 11 characters: four uppercase letters, `0`, then six uppercase letters or digits. Preserve account numbers as strings, including leading zeroes. The required-fields table does not describe nesting or whether `recipient.phone` is mandatory; examples follow the published nested shape without adding validation based on an inferred contract.
+
+`inr_sum` is absent from the current official documentation. Its location, type, requirement, and relationship to the outer `amount` are unconfirmed; clients do not add or calculate it.
+
+TypeScript and Go transaction types follow the new documented response, and their transaction filters now accept strings (callers using numeric filters must convert explicitly). PHP returns decoded arrays and accepts arbitrary filter/payload arrays; Bash and HTTP also preserve raw JSON/string filters, so they require no response-schema changes. IMPS examples in Bash and HTTP were updated.

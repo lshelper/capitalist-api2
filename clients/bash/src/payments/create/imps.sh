@@ -18,9 +18,15 @@ capitalist_api2_create_payment_imps() {
   "comment": "IMPS payout example",
   "payload": {
     "type": "IMPS",
-    "account": "1234567890",
-    "account_name": "Raj Kumar",
-    "bank_code": "SBIN0001234"
+    "destination": {
+      "bankCode": "SBIN0001234",
+      "accountName": "Raj Kumar",
+      "accountNumber": "0123456789012345",
+      "bankName": "Punjab National Bank"
+    },
+    "recipient": {
+      "phone": "12125551234"
+    }
   }
 }
 JSON

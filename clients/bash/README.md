@@ -72,3 +72,7 @@ capitalist_api2_create_payment_capitalist
 ```bash
 ./tests/signature_test.sh
 ```
+
+## API documentation sync: 2026-10-01
+
+See `../../docs/api-surface.md` for the updated transaction history contract, nested IMPS payload, and unresolved `inr_sum`/recipient requirements.
