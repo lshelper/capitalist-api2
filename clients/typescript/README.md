@@ -45,11 +45,13 @@ npm run build
 node examples/imps-synthetic.mjs
 ```
 
-The example uses a fixed amount of 100 USD and synthetic recipient details from the public documentation. To send one request manually, first configure these environment variables outside the repository:
+The example defaults to 100 USD; use `--amount 20` to select 20 USD (positive decimal, at most two fractional digits). Recipient details are synthetic and taken from the public documentation. To send one request manually, first configure these environment variables outside the repository:
 
 - `CAPITALIST_API2_BASE_URL`: explicitly selected HTTPS API origin, without `/v1`.
 - `CAPITALIST_API2_KEY` and `CAPITALIST_API2_SECRET`: credentials.
 - `CAPITALIST_API2_FROM_ACCOUNT`: verified USD source account.
 - `CAPITALIST_API2_USER_REQUEST_ID`: unique identifier for this operation.
 
-Then run `node examples/imps-synthetic.mjs --send`. This submits a payment to the configured environment; synthetic details alone do not establish a provider sandbox. The script sends once, logs only submission status/document ID, and never retries. After a timeout or error, reconcile by the supplied request ID before another submission. API keys, server addresses and source account data are not saved by this script.
+Then run `node examples/imps-synthetic.mjs --amount 20 --send` to submit 20 USD. This submits a payment to the configured environment; synthetic details alone do not establish a provider sandbox. The script sends once, logs the request ID, submission status/document ID and a redacted error reason, and never retries. After a timeout or error, reconcile by the supplied request ID before another submission. API keys, server addresses and source account data are not saved by this script.
+
+Run example regression checks with `node --test examples/imps-synthetic.test.mjs` after building the client.
