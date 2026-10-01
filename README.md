@@ -8,13 +8,13 @@ Multi-language clients for the Capitalist API2 integration API.
 >
 > **[Create a Capitalist account →](https://capitalist.net/reg?from=5ab603bd9f90dc8e733965d7a4a1cf0e)**
 
-Official documentation: https://docs.capitalist.net/api/integration-api.html
+**Documentation:** [Capitalist API2 integration guide](https://docs.capitalist.net/api/integration-api.html)
 
-API base URL: `https://api2.capitalist.net/`
+**API base URL:** `https://api2.capitalist.net/`
 
-## Documentation sync status
+## 📚 Documentation sync status
 
-Code, examples and shared API notes are current against the official documentation as of 2026-10-01.
+Code, examples and shared API notes are current against the official documentation as of **2026-10-01**.
 
 Stored upstream snapshot:
 
@@ -29,7 +29,7 @@ When the official documentation changes:
 4. Update the current-against-official-documentation date in this section.
 5. Run the relevant client tests before committing.
 
-## Repository layout
+## 📁 Repository layout
 
 ```text
 clients/
@@ -45,7 +45,7 @@ docs/
 
 Each client is intentionally self-contained: own README, examples, tests and package metadata where the language ecosystem expects it. Shared API decisions are documented in `docs/`.
 
-## Authentication model
+## 🔐 Authentication model
 
 Every request sends:
 
@@ -65,17 +65,17 @@ For `GET` requests the raw request body is an empty string.
 
 The first clients expose the core endpoints:
 
-- whitelist: read, add, remove
-- accounts: list accounts
-- exchange: create exchange, get rate
-- payments: create payment, get payment status
-- orders: list merchant orders
-- transactions: list transactions
-- KYC: start, status, set data, set picture, confirm
+- **Whitelist:** read, add, remove
+- **Accounts:** list accounts
+- **Exchange:** create exchange, get rate
+- **Payments:** create payment, get payment status
+- **Orders:** list merchant orders
+- **Transactions:** list transactions
+- **KYC:** start, status, set data, set picture, confirm
 
 Payment channel payloads are accepted as plain objects first. Stronger typed builders can be added per language once the base clients are stable.
 
-## Payment directions and channel types
+## 💳 Payment directions and channel types
 
 The clients expose `POST /v1/payment` and payment-status lookup. Payment payloads are plain objects/maps in TypeScript, Go and PHP; the repository also provides [Bash payment helpers](clients/bash/src/payments/create/) and [IntelliJ HTTP examples](clients/http/payments/create/) for the following directions. Channel names describe API contracts and examples, not guaranteed availability for every account or a confirmed production rollout.
 
@@ -99,13 +99,13 @@ The clients expose `POST /v1/payment` and payment-status lookup. Payment payload
 | Prepaid and gift cards | `BUY_ITEM` — Apple, Google, Steam, PlayStation, Xbox, Netflix and Spotify; query the prepaid product/denomination dictionaries for the current catalog |
 | Internal Capitalist transfers | `CAPITALIST` — transfers to Capitalist accounts |
 
-Some payment channels may be temporarily or permanently unavailable when you read this documentation. Confirm current availability for your account before submitting a payment.
+**Availability:** Some payment channels may be temporarily or permanently unavailable when you read this documentation. Confirm current availability for your account before submitting a payment.
 
 `UKRCARD` also has Ukrainian card payment examples and is present in the Invest API contract, but is not listed in the current official payment-channel catalog. `GECARD` (Georgia) and `TRCARD` (Turkey) are inactive: their executable examples were removed even though upstream documentation still lists them. `UKR_MOBILE` is no longer documented and is not included among the maintained examples. See [removed channels](clients/http/payments/removed-channels.http).
 
-Sources: [official payment-channel documentation](https://docs.capitalist.net/api/integration-api.html#_payment_channels), [shared API surface](docs/api-surface.md), and the linked client examples. Currency/network details describe destination channels; they do not prescribe the debit account currency, fees or exchange rates.
+**Sources:** [official payment-channel documentation](https://docs.capitalist.net/api/integration-api.html#_payment_channels), [shared API surface](docs/api-surface.md), and the linked client examples. Currency/network details describe destination channels; they do not prescribe the debit account currency, fees or exchange rates.
 
-## Docker
+## 🐳 Docker
 
 The PHP client includes a Docker setup for running PHP 7.4 locally without installing PHP on the host.
 The Go client also includes a Docker setup for running tests, builds and examples without installing Go locally.
