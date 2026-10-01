@@ -103,8 +103,6 @@ Some payment channels may be temporarily or permanently unavailable when you rea
 
 `UKRCARD` also has Ukrainian card payment examples and is present in the Invest API contract, but is not listed in the current official payment-channel catalog. `GECARD` (Georgia) and `TRCARD` (Turkey) are inactive: their executable examples were removed even though upstream documentation still lists them. `UKR_MOBILE` is no longer documented and is not included among the maintained examples. See [removed channels](clients/http/payments/removed-channels.http).
 
-IMPS deployment compatibility: the current documented payload uses `destination` and `recipient`. A production response observed on 2026-10-01 still required `inr_sum`, while the current Invest `develop` and `master` contracts remove it. Confirm the deployed contract before use; do not interpret an INR amount as the outer USD amount.
-
 Sources: [official payment-channel documentation](https://docs.capitalist.net/api/integration-api.html#_payment_channels), [shared API surface](docs/api-surface.md), and the linked client examples. Currency/network details describe destination channels; they do not prescribe the debit account currency, fees or exchange rates.
 
 ## Docker
