@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # UKRCARD payment
 capitalist_api2_create_payment_ukrcard() {
   local user_request_id="${1:-ukrcard-$(capitalist_api2_now_ms)}"

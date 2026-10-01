@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # SBP payment
 capitalist_api2_create_payment_sbp() {
   local user_request_id="${1:-sbp-$(capitalist_api2_now_ms)}"

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # RUCARDP2P payment
 capitalist_api2_create_payment_rucardp2p() {
   local user_request_id="${1:-rucardp2p-$(capitalist_api2_now_ms)}"

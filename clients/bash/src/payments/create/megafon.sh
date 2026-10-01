@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # MEGAFON mobile payment
 capitalist_api2_create_payment_megafon() {
   local user_request_id="${1:-megafon-$(capitalist_api2_now_ms)}"

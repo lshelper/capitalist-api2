@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # MTS mobile payment
 capitalist_api2_create_payment_mts() {
   local user_request_id="${1:-mts-$(capitalist_api2_now_ms)}"

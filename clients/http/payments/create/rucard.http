@@ -1,4 +1,5 @@
 ### RUCARD payment
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
 < {% import { signCapitalistRequest } from "../../sign-capitalist.js"; signCapitalistRequest(request, crypto); %}
 POST {{baseUrl}}/v1/payment
 API-Key: {{apiKey}}

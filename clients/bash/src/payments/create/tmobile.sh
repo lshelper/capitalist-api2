@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # TMOBILE mobile payment
 capitalist_api2_create_payment_tmobile() {
   local user_request_id="${1:-tmobile-$(capitalist_api2_now_ms)}"

@@ -12,6 +12,7 @@ import (
 	"github.com/lshelper/capitalist-api2/clients/go/examples/internal/exampleclient"
 )
 
+// This payment channel may currently be unavailable. Confirm availability before submitting a payment.
 func main() {
 	if len(os.Args) < 6 {
 		log.Fatal("usage: go run ./examples/create-rucard-payment FROM_ACCOUNT CARD_NUMBER NAME SURNAME MIDNAME [AMOUNT] [CURRENCY]")

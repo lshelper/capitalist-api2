@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This payment channel may currently be unavailable. Confirm availability before submitting a payment.
+
 # TELE2 mobile payment
 capitalist_api2_create_payment_tele2() {
   local user_request_id="${1:-tele2-$(capitalist_api2_now_ms)}"

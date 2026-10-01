@@ -2,6 +2,12 @@
 
 Multi-language clients for the Capitalist API2 integration API.
 
+> **Capitalist — a payment system for transfers and API integrations**
+>
+> Send internal Capitalist transfers and integrate card, bank, e-wallet and cryptocurrency payment directions through Capitalist API2. Available directions depend on your account and the current service configuration.
+>
+> **[Create a Capitalist account →](https://capitalist.net/reg?from=5ab603bd9f90dc8e733965d7a4a1cf0e)**
+
 Official documentation: https://docs.capitalist.net/api/integration-api.html
 
 API base URL: `https://api2.capitalist.net/`
@@ -68,6 +74,38 @@ The first clients expose the core endpoints:
 - KYC: start, status, set data, set picture, confirm
 
 Payment channel payloads are accepted as plain objects first. Stronger typed builders can be added per language once the base clients are stable.
+
+## Payment directions and channel types
+
+The clients expose `POST /v1/payment` and payment-status lookup. Payment payloads are plain objects/maps in TypeScript, Go and PHP; the repository also provides [Bash payment helpers](clients/bash/src/payments/create/) and [IntelliJ HTTP examples](clients/http/payments/create/) for the following directions. Channel names describe API contracts and examples, not guaranteed availability for every account or a confirmed production rollout.
+
+| Direction | API payment types and destinations |
+| --- | --- |
+| ~~Russian bank cards and peer-to-peer (P2P) transfers~~ | ~~`RUCARD`, `RUCARDP2P`, `RUCARDP2PDYN` — Russia~~ |
+| ~~Ukrainian bank cards~~ | ~~`UKRCARD` — Ukraine (repository examples; not listed in the current official catalog)~~ |
+| Regional bank cards | `AZCARD` — Azerbaijan; `KZCARD` — Kazakhstan; `UZCARD` — Uzbekistan |
+| International bank cards | `WORLDCARDEUR` — EUR; `WORLDCARDUSD` — USD |
+| Bank transfers in Latin America | `ARBANK` — Argentina; `BRBANK` — Brazil; `COBANK` — Colombia |
+| Bank transfers in Asia | `MALAYSIA_BANK` — Malaysia; `INDONESIA_BANK` — Indonesia; `THAILAND_BANK` — Thailand; `SOUTH_KOREA_BANK` — South Korea |
+| Fast payment systems | ~~`SBP` — Russian Faster Payments System (Система быстрых платежей, СБП)~~; `IMPS` — Immediate Payment Service, India |
+| ~~Mobile phone topups~~ | ~~`MEGAFON`, `TMOBILE`, `BEELINE`, `MTS`, `TELE2`, `YOTA`~~ |
+| Payoneer payouts | `PAYONEER`, `PAYONEER_EUR`, `PAYONEER_USD` |
+| Electronic wallets | `EUR_NETELLER` — Neteller; `EUR_SKRILL` — Skrill; `PAYTM` — Paytm, India; `GCASH` — GCash, Philippines; `WM` — WebMoney |
+| Regional wallets and transfers | `PAGS_CHWALLET` — Vita Wallet, Chile; `PAGS_MXSPEI` — SPEI, Mexico; `PAGS_COWALLET` — Nequi and Tpaga, Colombia; `PAGS_COTRAN` — Transfiya, Colombia; `EPAY_EPAY_E_VN_ZALO` — ZaloPay; `EPAY_EPAY_E_BD_BKASH` — bKash |
+| Bitcoin and Ethereum withdrawals | `BITCOIN` — BTC; `ETH` — Ethereum |
+| Tether (USDT) withdrawals | `USDTERC20` — Ethereum ERC-20; `USDTTRC20` — Tron TRC-20; `USDTBSC` — BNB Smart Chain (BSC), BEP-20 |
+| USD Coin (USDC) withdrawals | `USDCERC20` — Ethereum ERC-20; `USDCBSC` — BNB Smart Chain (BSC), BEP-20 |
+| ~~Steam account topups~~ | ~~`STEAM` — Steam RUR accounts; `TOPUP_SERVICE` — service/region-based Steam balance topups~~ |
+| Prepaid and gift cards | `BUY_ITEM` — Apple, Google, Steam, PlayStation, Xbox, Netflix and Spotify; query the prepaid product/denomination dictionaries for the current catalog |
+| Internal Capitalist transfers | `CAPITALIST` — transfers to Capitalist accounts |
+
+Some payment channels may be temporarily or permanently unavailable when you read this documentation. Confirm current availability for your account before submitting a payment.
+
+`UKRCARD` also has Ukrainian card payment examples and is present in the Invest API contract, but is not listed in the current official payment-channel catalog. `GECARD` (Georgia) and `TRCARD` (Turkey) are inactive: their executable examples were removed even though upstream documentation still lists them. `UKR_MOBILE` is no longer documented and is not included among the maintained examples. See [removed channels](clients/http/payments/removed-channels.http).
+
+IMPS deployment compatibility: the current documented payload uses `destination` and `recipient`. A production response observed on 2026-10-01 still required `inr_sum`, while the current Invest `develop` and `master` contracts remove it. Confirm the deployed contract before use; do not interpret an INR amount as the outer USD amount.
+
+Sources: [official payment-channel documentation](https://docs.capitalist.net/api/integration-api.html#_payment_channels), [shared API surface](docs/api-surface.md), and the linked client examples. Currency/network details describe destination channels; they do not prescribe the debit account currency, fees or exchange rates.
 
 ## Docker
 
